@@ -18,7 +18,7 @@ public class MavenDatabase {
 
 //        // Initialize the default app
 //        FirebaseApp defaultApp = FirebaseApp.initializeApp(defaultOptions);
-//s
+//
 //        System.out.println(defaultApp.getName());  // "[DEFAULT]"
 //
 //        // Retrieve services by passing the defaultApp variable...
