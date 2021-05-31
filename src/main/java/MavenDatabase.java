@@ -36,6 +36,7 @@ public class MavenDatabase {
         List<QueryDocumentSnapshot> documents = future.get().getDocuments();
         for (QueryDocumentSnapshot document : documents) {
 //            System.out.println(document.getData());
+            //test
         }
 
         // Object dat je gaat schrijven naar de database
