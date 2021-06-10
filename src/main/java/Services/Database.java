@@ -56,7 +56,6 @@ public class Database {
                             }
                         }
                         System.out.println("Current cites in CA: " + cities);
-//                        dfasdhfasdhfjasdhvuocvuj
                     }
                 });
 
