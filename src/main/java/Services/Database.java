@@ -46,6 +46,6 @@ public class Database {
     }
 
     public void delPlayer() {
-        
+
     }
 }
