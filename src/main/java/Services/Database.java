@@ -45,5 +45,7 @@ public class Database {
         System.out.println("Update time : " + docRef.get().getUpdateTime());
     }
 
-    public void
+    public void delPlayer() {
+        
+    }
 }
