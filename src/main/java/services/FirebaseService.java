@@ -12,6 +12,7 @@ import com.google.firebase.cloud.FirestoreClient;
 import models.User;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,20 +20,14 @@ import java.util.concurrent.ExecutionException;
 
 
 public class FirebaseService {
-    private static Firestore db;
+
 
     public static void addPlayer(String playerName) throws ExecutionException, InterruptedException, NullPointerException, IOException {
-        FileInputStream refreshToken = new FileInputStream("risk14-firebase-adminsdk-w2fgi-89c33e4d8e.json");
-        FirebaseOptions options = FirebaseOptions.builder()
-                .setCredentials(GoogleCredentials.fromStream(refreshToken))
-                .build();
-        FirebaseApp.initializeApp(options);
-        db = FirestoreClient.getFirestore();
 
         User newUser = new User();
 
         Integer idNum = 0;
-        DocumentReference snapshot = db.collection("players").document("info");
+        DocumentReference snapshot = InitFirebase.getDbInstance().collection("players").document("info");
         ApiFuture<DocumentSnapshot> future = snapshot.get();
         Map<String, Object> map = future.get().getData();
         idNum = map.size();
@@ -41,8 +36,7 @@ public class FirebaseService {
         newUser.setPlayerId(idNum+1);
         newUser.setPlayerName(playerName);
 
-
-        ApiFuture<WriteResult> docRef = db
+        ApiFuture<WriteResult> docRef = InitFirebase.getDbInstance()
                 .collection("players")
                 .document("info")
                 .update(newUser.getPlayerName(), newUser.getPlayerId());
