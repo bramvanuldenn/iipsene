@@ -1,13 +1,19 @@
 package controllers;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import services.FirebaseService;
+
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class BoardController {
+    FirebaseService firebaseService;
 
-        @FXML
-        private void startGamePressed(ActionEvent event) {
-            event.consume();
-            System.out.println("Pressed Button!");
-        }
+    public BoardController(FirebaseService firebaseService) {
+        this.firebaseService = firebaseService;
+    }
+
+    public static void addPlayer(String playerName) throws ExecutionException, InterruptedException, IOException {
+        FirebaseService.addPlayer(playerName);
+    }
+
 }

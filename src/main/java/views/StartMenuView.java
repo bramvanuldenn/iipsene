@@ -10,7 +10,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
+import controllers.BoardController;
 public class StartMenuView {
 
     private Stage stage;
@@ -20,11 +22,12 @@ public class StartMenuView {
     @FXML
     TextField enteredName = new TextField();
 
-    public void startGamePressed(MouseEvent event) throws IOException {
+    public void startGamePressed(MouseEvent event) throws IOException, ExecutionException, InterruptedException {
         System.out.println("Button Pressed!");
         String userName = enteredName.getText().toString();
         if (userName != null && !userName.isEmpty()) {
             System.out.println("Valid username!");
+            BoardController.addPlayer(userName);
         } else {
             enteredName.setText("Please Enter a valid username!");
         }
