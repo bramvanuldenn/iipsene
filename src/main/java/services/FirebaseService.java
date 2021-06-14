@@ -22,6 +22,13 @@ public class FirebaseService {
     private static Firestore db;
 
     public static void addPlayer(String playerName) throws ExecutionException, InterruptedException, NullPointerException, IOException {
+        FileInputStream refreshToken = new FileInputStream("risk14-firebase-adminsdk-w2fgi-89c33e4d8e.json");
+        FirebaseOptions options = FirebaseOptions.builder()
+                .setCredentials(GoogleCredentials.fromStream(refreshToken))
+                .build();
+        FirebaseApp.initializeApp(options);
+        db = FirestoreClient.getFirestore();
+
         User newUser = new User();
 
         Integer idNum = 0;
