@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class User {
 
     String playerName;
-    ArrayList<Integer> playerId = new ArrayList<>();
+    Integer playerId;
     ArrayList<String> countryArray;
     Scanner input = new Scanner(System.in);
 
@@ -14,17 +14,16 @@ public class User {
         return playerName;
     }
 
-    public String setPlayerName(String str) {
-        str = input.next();
-        return str;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
-    public ArrayList<Integer> getPlayerId() {
+    public Integer getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(Integer id) {
-       playerId.add(id);
+    public void setPlayerId(Integer playerId) {
+        this.playerId = playerId;
     }
 
     public ArrayList<String> getCountryArray() {
