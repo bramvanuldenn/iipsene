@@ -39,7 +39,7 @@ public class FirebaseService {
         ApiFuture<WriteResult> docRef = InitFirebase.getDbInstance()
                 .collection("players")
                 .document("info")
-                .update(newUser.getPlayerName(), newUser.getPlayerId());
+                .update(String.valueOf(newUser.getPlayerId()), newUser.getPlayerName());
 
         System.out.println("Added user: " + docRef.get());
     }
