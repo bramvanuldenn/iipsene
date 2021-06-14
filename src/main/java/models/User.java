@@ -14,17 +14,16 @@ public class User {
         return playerName;
     }
 
-    public String setPlayerName(String str) {
-        str = input.next();
-        return str;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public Integer getPlayerId() {
         return playerId;
     }
 
-    public void setPlayerId(Integer id) {
-       this.playerId = playerId;
+    public void setPlayerId(Integer playerId) {
+        this.playerId = playerId;
     }
 
     public ArrayList<String> getCountryArray() {
@@ -35,4 +34,11 @@ public class User {
         this.countryArray = countryArray;
     }
 
+    public Scanner getInput() {
+        return input;
+    }
+
+    public void setInput(Scanner input) {
+        this.input = input;
+    }
 }
