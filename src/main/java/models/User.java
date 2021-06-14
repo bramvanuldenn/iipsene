@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class User {
 
     String playerName;
-    ArrayList<Integer> playerId = new ArrayList<>();
+    Integer playerId;
     ArrayList<String> countryArray;
     Scanner input = new Scanner(System.in);
 
@@ -19,12 +19,12 @@ public class User {
         return str;
     }
 
-    public ArrayList<Integer> getPlayerId() {
+    public Integer getPlayerId() {
         return playerId;
     }
 
     public void setPlayerId(Integer id) {
-       playerId.add(id);
+       this.playerId = playerId;
     }
 
     public ArrayList<String> getCountryArray() {
@@ -35,11 +35,4 @@ public class User {
         this.countryArray = countryArray;
     }
 
-    public Scanner getInput() {
-        return input;
-    }
-
-    public void setInput(Scanner input) {
-        this.input = input;
-    }
 }

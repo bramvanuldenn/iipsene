@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 
 public class FirebaseService {
     static FirebaseService firebaseService;
-    private static Firestore db;
+    public static Firestore db;
 
 
     public static FirebaseService getInstance() {
