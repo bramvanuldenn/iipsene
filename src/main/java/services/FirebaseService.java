@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutionException;
 public class FirebaseService {
 
 
-    public static void addPlayer(String playerName) throws ExecutionException, InterruptedException, NullPointerException, IOException {
+    public static boolean addPlayer(String playerName) throws ExecutionException, InterruptedException, NullPointerException, IOException {
 
         User newUser = new User();
 
@@ -39,8 +39,8 @@ public class FirebaseService {
         ApiFuture<WriteResult> docRef = InitFirebase.getDbInstance()
                 .collection("players")
                 .document("info")
-                .update(newUser.getPlayerName(), newUser.getPlayerId());
-
+                .update(String.valueOf(newUser.getPlayerId()), newUser.getPlayerName());
         System.out.println("Added user: " + docRef.get());
+        return true;
     }
 }
