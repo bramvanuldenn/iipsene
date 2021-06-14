@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutionException;
 
 public class FirebaseService {
 
-
+// hayyan branch
     public static void addPlayer(String playerName) throws ExecutionException, InterruptedException, NullPointerException, IOException {
 
         User newUser = new User();
