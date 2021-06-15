@@ -1,18 +1,17 @@
 package models;
 
-import com.google.cloud.firestore.FieldPath;
-
 import java.util.ArrayList;
 
 public class User {
 
     String playerName;
     Integer playerId;
+    ArrayList<Double> countryArray;
+    ArrayList<Double> cardArray;
+
     public String getPlayerName() {
         return playerName;
     }
-
-    ArrayList<String> countryArray;
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
@@ -26,11 +25,19 @@ public class User {
         this.playerId = playerId;
     }
 
-    public ArrayList<String> getCountryArray() {
+    public ArrayList<Double> getCountryArray() {
         return countryArray;
     }
 
-    public void setCountryArray(ArrayList<String> countryArray) {
+    public void setCountryArray(ArrayList<Double> countryArray) {
         this.countryArray = countryArray;
+    }
+
+    public ArrayList<Double> getCardArray() {
+        return cardArray;
+    }
+
+    public void setCardArray(ArrayList<Double> cardArray) {
+        this.cardArray = cardArray;
     }
 }

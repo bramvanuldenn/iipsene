@@ -1,18 +1,11 @@
 package services;
 
 import com.google.api.core.ApiFuture;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.cloud.FirestoreClient;
 import models.User;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +15,7 @@ import java.util.concurrent.ExecutionException;
 public class FirebaseService {
 
 
-    public static void addPlayer(String playerName) throws ExecutionException, InterruptedException, NullPointerException, IOException {
+    public static boolean addPlayer(String playerName) throws ExecutionException, InterruptedException, NullPointerException, IOException {
 
         User newUser = new User();
 
@@ -36,10 +29,21 @@ public class FirebaseService {
         newUser.setPlayerId(idNum+1);
         newUser.setPlayerName(playerName);
 
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("playerName", newUser.getPlayerName());
+        userData.put("cards", newUser.getCardArray());
+        userData.put("countries", newUser.getCountryArray());
+
         ApiFuture<WriteResult> docRef = InitFirebase.getDbInstance()
                 .collection("players")
                 .document("info")
-                .update(String.valueOf(newUser.getPlayerId()), newUser.getPlayerName());
+                .update(String.valueOf(newUser.getPlayerId()), userData);
         System.out.println("Added user: " + docRef.get());
+        future = snapshot.get();
+        map = future.get().getData();
+        if (map.containsKey(String.valueOf(newUser.getPlayerId()))){
+            return true;
+        }
+        return false;
     }
 }
