@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 
 import controllers.BoardController;
 
-public class GameMenuView {
+public class GameMenuView extends GameObserver{
 
     BoardController boardController;
 
