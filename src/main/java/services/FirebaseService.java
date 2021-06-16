@@ -19,19 +19,17 @@ import java.util.concurrent.ExecutionException;
 */
 public class FirebaseService {
 
+    private static Integer idNum;
 
     public static boolean addPlayer(String playerName) throws ExecutionException, InterruptedException, NullPointerException, IOException {
-
         User newUser = new User();
 
-        Integer idNum;
         DocumentReference snapshot = InitFirebase.getDbInstance().collection("players").document("info");
         ApiFuture<DocumentSnapshot> future = snapshot.get();
         Map<String, Object> map = future.get().getData();
         idNum = Objects.requireNonNull(map).size();
         System.out.println(idNum);
-
-        if (idNum <=5) {
+        if (idNum >= 5) {
             return false;
         }
 

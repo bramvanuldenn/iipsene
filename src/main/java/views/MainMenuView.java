@@ -1,13 +1,12 @@
 package views;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import controllers.MainMenuController;
+import models.MainMenu;
 import services.FirebaseService;
 import shared.MenuObservable;
 import shared.MenuObserver;
@@ -20,6 +19,7 @@ public class MainMenuView implements MenuObserver {
 
     @FXML
     TextField enteredName = new TextField();
+    Label closed = new Label();
 
     @FXML
     protected void initialize(){
@@ -37,11 +37,13 @@ public class MainMenuView implements MenuObserver {
         System.out.println("set game menu");
     }
 
-    public void startGamePressed(MouseEvent event) throws IOException, ExecutionException, InterruptedException {
-        String userName = enteredName.getText().toString();
+    public void startGamePressed() throws IOException, ExecutionException, InterruptedException, NullPointerException {
+        String userName = enteredName.getText();
         if (userName != null && !userName.isEmpty()) {
             if (FirebaseService.addPlayer(userName)) {
                 mainMenuController.setGameMenu();
+            } else {
+
             }
         } else {
             enteredName.setText("Please Enter a valid username!");
