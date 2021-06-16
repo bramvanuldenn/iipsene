@@ -46,7 +46,7 @@ public class MainMenuView implements MenuObserver {
             this.stage.show();
             System.out.println("set game menu");
         } catch (IOException ex) {
-            System.err.println("Error reading file");
+            System.err.println("Error reading file: " + ex);
         }
     }
 

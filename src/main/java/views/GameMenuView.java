@@ -1,19 +1,25 @@
 package views;
 
+import controllers.GameMenuController;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 
-import controllers.MainMenuController;
+import models.GameMenu;
+import shared.GameObservable;
 import shared.GameObserver;
 
-public class GameMenuView extends GameObserver {
+public class GameMenuView implements GameObserver {
+    GameMenu gameMenu = new GameMenu();
+    GameMenuController gameMenuController;
 
-    MainMenuController mainMenuController;
+    @FXML
+    ImageView settingsButton;
 
     private Stage stage;
     private Scene scene;
@@ -22,11 +28,20 @@ public class GameMenuView extends GameObserver {
 
     @FXML
     protected void initialize() throws FileNotFoundException {
-        this.mainMenuController = MainMenuController.getInstance();
+        this.gameMenuController = gameMenuController.getInstance();
+        this.gameMenuController.registerObserver(this);
     }
 
-
     public void settingsButtonPressed(MouseEvent event) {
-        System.out.println("button pressed");
+        gameMenuController.settingsPressed();
+    }
+
+    public void setSettingsVis(boolean state) {
+        settingsButton.setVisible(state);
+    }
+
+    @Override
+    public void update(boolean state) {
+        setSettingsVis(state);
     }
 }
