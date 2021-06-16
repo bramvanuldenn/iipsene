@@ -2,12 +2,17 @@ package models;
 
 import java.util.ArrayList;
 
+/* Alle eigenschappen die een speler kan nodig hebben.
+ * vanaf hier kunnen wij alle info van alle spelers controlleren door de setters and getters.
+ * @author Hayyan Mezher.
+ */
+
 public class User {
 
-    String playerName;
-    Integer playerId;
-    ArrayList<Double> countryArray;
-    ArrayList<Double> cardArray;
+    private String playerName;
+    private Integer playerId;
+    private ArrayList<Double> countryArray;
+    private ArrayList<Double> cardArray;
 
     public String getPlayerName() {
         return playerName;

@@ -9,9 +9,14 @@ import models.User;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
-
+/* Alle services die wij met de firestore kunnen uitvoeren.
+ * Hierbij is gebruikt gemaakt van de "user.playerName" als een parameter zodat wij een user aan de database kunnen toevoegen.
+ * met zelf gegenereerd Id voor elke speler.
+ * @author Hayyan Mezher.
+*/
 public class FirebaseService {
 
 
@@ -19,12 +24,16 @@ public class FirebaseService {
 
         User newUser = new User();
 
-        Integer idNum = 0;
+        Integer idNum;
         DocumentReference snapshot = InitFirebase.getDbInstance().collection("players").document("info");
         ApiFuture<DocumentSnapshot> future = snapshot.get();
         Map<String, Object> map = future.get().getData();
-        idNum = map.size();
+        idNum = Objects.requireNonNull(map).size();
         System.out.println(idNum);
+
+        if (idNum <=5) {
+            return false;
+        }
 
         newUser.setPlayerId(idNum+1);
         newUser.setPlayerName(playerName);
@@ -41,8 +50,8 @@ public class FirebaseService {
         System.out.println("Added user: " + docRef.get());
         future = snapshot.get();
         map = future.get().getData();
-        if (map.containsKey(String.valueOf(newUser.getPlayerId()))){
-            return true;
+        if (map != null) {
+            return map.containsKey(String.valueOf(newUser.getPlayerId()));
         }
         return false;
     }
