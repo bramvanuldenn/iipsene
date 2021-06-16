@@ -18,6 +18,12 @@ public class StartMenuView {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    BoardController boardController;
+
+    @FXML
+    protected void initialize(){
+        this.boardController = BoardController.getInstance();
+    }
 
     @FXML
     TextField enteredName = new TextField();
@@ -27,7 +33,15 @@ public class StartMenuView {
         String userName = enteredName.getText().toString();
         if (userName != null && !userName.isEmpty()) {
             System.out.println("Valid username!");
-            BoardController.addPlayer(userName);
+            if (BoardController.addPlayer(userName)) {
+                FXMLLoader loader = new FXMLLoader();
+                FileInputStream fileInputStream = new FileInputStream(("src/assists/views/gamemenu.fxml"));
+                this.root = loader.load(fileInputStream);
+                this.stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+                this.scene = new Scene(root, 1000, 800);
+                stage.setScene(scene);
+                stage.show();
+            }
         } else {
             enteredName.setText("Please Enter a valid username!");
         }
