@@ -13,7 +13,7 @@ public class MainMenu implements MenuObservable {
     }
 
     public void setGameMenu() {
-
+        notifyAllObservers();
     }
 
     public void register(MenuObserver observer) {
