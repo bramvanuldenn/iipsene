@@ -1,4 +1,4 @@
-package views;
+package shared;
 
 import java.util.Observable;
 import java.util.Observer;

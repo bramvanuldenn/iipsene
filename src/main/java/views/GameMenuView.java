@@ -1,28 +1,19 @@
 package views;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 
-import controllers.BoardController;
+import controllers.MainMenuController;
+import shared.GameObserver;
 
-public class GameMenuView extends GameObserver{
+public class GameMenuView extends GameObserver {
 
-    BoardController boardController;
+    MainMenuController mainMenuController;
 
     private Stage stage;
     private Scene scene;
@@ -31,7 +22,7 @@ public class GameMenuView extends GameObserver{
 
     @FXML
     protected void initialize() throws FileNotFoundException {
-        this.boardController = BoardController.getInstance();
+        this.mainMenuController = MainMenuController.getInstance();
     }
 
 
