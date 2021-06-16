@@ -22,9 +22,7 @@ public class GUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        FileInputStream fileInputStream = new FileInputStream(("resources/mainmenu.fxml"));
-        Parent root = loader.load(fileInputStream);
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("mainmenu.fxml"));
         primaryStage.setTitle("Very Basic Board Game");
         primaryStage.setScene(new Scene(root, 1000, 800));
         primaryStage.show();
