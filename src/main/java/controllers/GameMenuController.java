@@ -24,7 +24,6 @@ public class GameMenuController {
     }
 
     public void settingsPressed() {
-
         gameMenu.setSettingsVis(gameMenu.isSettingsVisible());
     }
 }

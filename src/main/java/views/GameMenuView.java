@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 
 import models.GameMenu;
-import shared.GameObservable;
 import shared.GameObserver;
 
 public class GameMenuView implements GameObserver {
@@ -37,7 +36,11 @@ public class GameMenuView implements GameObserver {
     }
 
     public void setSettingsVis(boolean state) {
-        settingsButton.setVisible(state);
+        if (state) {
+            settingsButton.setOpacity(0.0);
+        } else {
+            settingsButton.setOpacity(1.0);
+        }
     }
 
     @Override

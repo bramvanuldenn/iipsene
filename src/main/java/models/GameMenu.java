@@ -22,23 +22,18 @@ public class GameMenu implements GameObservable {
         this.settingsVisible = !this.settingsVisible;
     }
 
-    public void hideSettings() {
-        setSettingsVisibility();
-        notifyAllObservers();
-    }
-
     public void register(GameObserver observer) {
         observers.add(observer);
     }
 
-    public void notifyAllObservers() {
-        for (GameObserver s : observers) {
-            s.update(this);
-        }
-    }
-
-    public void setSettingsVis() {
+    public void setSettingsVis(boolean settingsVisible) {
         setSettingsVisibility();
         notifyAllObservers();
+    }
+
+    public void notifyAllObservers() {
+        for (GameObserver s : observers) {
+            s.update(this.settingsVisible);
+        }
     }
 }
