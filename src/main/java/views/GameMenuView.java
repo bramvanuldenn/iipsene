@@ -38,7 +38,7 @@ public class GameMenuView implements GameObserver, CountryObserver {
         createCountries();
         gc = gameCanvas.getGraphicsContext2D();
         for (int i = 0; i < countries.size(); i++) {
-            drawCountry(countries.get(i));
+            gameMenuController.drawCountry(countries.get(i));
         }
     }
 
