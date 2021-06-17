@@ -16,9 +16,10 @@ public class GameMenuController {
     GameMenu gameMenu;
     Country country;
 
-    private GameMenuController() {
+    public GameMenuController() {
         gameMenu = new GameMenu();
         country = new Country();
+        createCountries();
     }
 
     public static GameMenuController getInstance(){
