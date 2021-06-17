@@ -19,6 +19,7 @@ public class MainMenuView implements MenuObserver {
 
     @FXML
     TextField enteredName = new TextField();
+    @FXML
     Label closed = new Label();
 
     @FXML
@@ -42,8 +43,6 @@ public class MainMenuView implements MenuObserver {
         if (userName != null && !userName.isEmpty()) {
             if (FirebaseService.addPlayer(userName)) {
                 mainMenuController.setGameMenu();
-            } else {
-
             }
         } else {
             enteredName.setText("Please Enter a valid username!");

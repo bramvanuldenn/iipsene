@@ -1,11 +1,13 @@
 package controllers;
 
+import models.Dice;
 import models.MainMenu;
 import shared.MenuObserver;
 
 public class MainMenuController {
     static MainMenuController mainMenuController;
     MainMenu menu;
+    Dice diceControl;
 
     private MainMenuController() {
         menu = new MainMenu();
@@ -25,4 +27,5 @@ public class MainMenuController {
     public void registerObserver(MenuObserver abc) {
         menu.register(abc);
     }
+
 }

@@ -29,11 +29,11 @@ public class FirebaseService {
         Map<String, Object> map = future.get().getData();
         idNum = Objects.requireNonNull(map).size();
         System.out.println(idNum);
-        if (idNum >= 5) {
+        newUser.setPlayerId(idNum+1);
+        if (idNum >= 1) {
             return false;
         }
 
-        newUser.setPlayerId(idNum+1);
         newUser.setPlayerName(playerName);
 
         Map<String, Object> userData = new HashMap<>();
