@@ -6,9 +6,10 @@ import shared.CountryObserver;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
-public class Country implements CountryObservable {
+public class Country implements CountryObservable, Comparable<Country> {
     private List<CountryObserver> observers = new ArrayList<CountryObserver>();
 
     private Country country;
@@ -18,6 +19,7 @@ public class Country implements CountryObservable {
     private int width;
     private int height;
     private Color color = Color.GRAY;
+    public Set<Country> adjacentCountries;
 
     public Country(String countryName, int countryX, int countryY, int width, int height, Color color) {
         this.countryName = countryName;
@@ -101,5 +103,10 @@ public class Country implements CountryObservable {
         for (CountryObserver s : observers) {
             s.update(country);
         }
+    }
+
+    @Override
+    public int compareTo(Country o) {
+        return countryName.compareTo(o.countryName);
     }
 }

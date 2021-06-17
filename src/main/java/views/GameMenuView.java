@@ -17,6 +17,8 @@ import shared.CountryObserver;
 import shared.GameObserver;
 
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class GameMenuView implements GameObserver, CountryObserver {
     GameMenuController gameMenuController;
@@ -85,7 +87,175 @@ public class GameMenuView implements GameObserver, CountryObserver {
         countries.add(new Country("Western Australia", 770, 360, 60, 70));
         countries.add(new Country("Eastern Australia", 830, 360, 50, 70));
         countries.add(new Country("New Guinea", 830, 310, 40, 25));
+
+        countries.get(0).adjacentCountries = new TreeSet<Country>();
+        countries.get(0).adjacentCountries.add(countries.get(1));
+        countries.get(0).adjacentCountries.add(countries.get(5));
+        countries.get(0).adjacentCountries.add(countries.get(36));
+
+        countries.get(1).adjacentCountries = new TreeSet<Country>();
+        countries.get(1).adjacentCountries.add(countries.get(5));
+        countries.get(1).adjacentCountries.add(countries.get(6));
+        countries.get(1).adjacentCountries.add(countries.get(8));
+
+        countries.get(2).adjacentCountries = new TreeSet<Country>();
+        countries.get(2).adjacentCountries.add(countries.get(3));
+        countries.get(2).adjacentCountries.add(countries.get(8));
+        countries.get(2).adjacentCountries.add(countries.get(9));
+
+        countries.get(3).adjacentCountries = new TreeSet<Country>();
+        countries.get(3).adjacentCountries.add(countries.get(6));
+        countries.get(3).adjacentCountries.add(countries.get(7));
+        countries.get(3).adjacentCountries.add(countries.get(8));
+
+        countries.get(4).adjacentCountries = new TreeSet<Country>();
+        countries.get(4).adjacentCountries.add(countries.get(5));
+        countries.get(4).adjacentCountries.add(countries.get(6));
+        countries.get(4).adjacentCountries.add(countries.get(7));
+        countries.get(4).adjacentCountries.add(countries.get(14));
+
+        countries.get(5).adjacentCountries = new TreeSet<Country>();
+        countries.get(5).adjacentCountries.add(countries.get(6));
+
+        countries.get(6).adjacentCountries = new TreeSet<Country>();
+        countries.get(6).adjacentCountries.add(countries.get(7));
+        countries.get(6).adjacentCountries.add(countries.get(8));
+
+        countries.get(7).adjacentCountries = new TreeSet<Country>();
+
+        countries.get(8).adjacentCountries = new TreeSet<Country>();
+
+        countries.get(9).adjacentCountries = new TreeSet<Country>();
+        countries.get(9).adjacentCountries.add(countries.get(10));
+        countries.get(9).adjacentCountries.add(countries.get(11));
+
+        countries.get(10).adjacentCountries = new TreeSet<Country>();
+        countries.get(10).adjacentCountries.add(countries.get(11));
+        countries.get(10).adjacentCountries.add(countries.get(12));
+        countries.get(10).adjacentCountries.add(
+                countries.get(22));
+
+        countries.get(11).adjacentCountries = new TreeSet<Country>();
+        countries.get(11).adjacentCountries.add(countries.get(12));
+
+        countries.get(12).adjacentCountries = new TreeSet<Country>();
+
+        countries.get(13).adjacentCountries = new TreeSet<Country>();
+        countries.get(13).adjacentCountries.add(countries.get(14));
+        countries.get(13).adjacentCountries.add(countries.get(15));
+        countries.get(13).adjacentCountries.add(countries.get(16));
+        countries.get(13).adjacentCountries.add(countries.get(19));
+
+        countries.get(14).adjacentCountries = new TreeSet<Country>();
+
+        countries.get(15).adjacentCountries = new TreeSet<Country>();
+        countries.get(15).adjacentCountries.add(countries.get(16));
+        countries.get(15).adjacentCountries.add(countries.get(17));
+        countries.get(15).adjacentCountries.add(countries.get(18));
+        countries.get(15).adjacentCountries.add(countries.get(19));
+
+        countries.get(16).adjacentCountries = new TreeSet<Country>();
+        countries.get(16).adjacentCountries.add(countries.get(17));
+
+        countries.get(17).adjacentCountries = new TreeSet<Country>();
+        countries.get(17).adjacentCountries.add(countries.get(18));
+        countries.get(17).adjacentCountries.add(countries.get(26));
+        countries.get(17).adjacentCountries.add(countries.get(27));
+        countries.get(17).adjacentCountries.add(countries.get(28));
+
+        countries.get(18).adjacentCountries = new TreeSet<Country>();
+        countries.get(18).adjacentCountries.add(countries.get(19));
+        countries.get(18).adjacentCountries.add(countries.get(21));
+        countries.get(18).adjacentCountries.add(countries.get(22));
+        countries.get(18).adjacentCountries.add(countries.get(26));
+
+        countries.get(19).adjacentCountries = new TreeSet<Country>();
+        countries.get(19).adjacentCountries.add(countries.get(22));
+
+        countries.get(20).adjacentCountries = new TreeSet<Country>();
+        countries.get(20).adjacentCountries.add(countries.get(23));
+        countries.get(20).adjacentCountries.add(countries.get(25));
+
+        countries.get(21).adjacentCountries = new TreeSet<Country>();
+        countries.get(21).adjacentCountries.add(countries.get(22));
+        countries.get(21).adjacentCountries.add(countries.get(23));
+        countries.get(21).adjacentCountries.add(countries.get(26));
+
+        countries.get(22).adjacentCountries = new TreeSet<Country>();
+        countries.get(22).adjacentCountries.add(countries.get(23));
+        countries.get(22).adjacentCountries.add(countries.get(24));
+
+        countries.get(23).adjacentCountries = new TreeSet<Country>();
+        countries.get(23).adjacentCountries.add(countries.get(24));
+        countries.get(23).adjacentCountries.add(countries.get(25));
+        countries.get(23).adjacentCountries.add(countries.get(26));
+
+        countries.get(24).adjacentCountries = new TreeSet<Country>();
+        countries.get(24).adjacentCountries.add(countries.get(25));
+
+        countries.get(25).adjacentCountries = new TreeSet<Country>();
+
+        countries.get(26).adjacentCountries = new TreeSet<Country>();
+        countries.get(26).adjacentCountries.add(countries.get(27));
+        countries.get(26).adjacentCountries.add(countries.get(29));
+
+        countries.get(27).adjacentCountries = new TreeSet<Country>();
+        countries.get(27).adjacentCountries.add(countries.get(28));
+        countries.get(27).adjacentCountries.add(countries.get(29));
+        countries.get(27).adjacentCountries.add(countries.get(30));
+
+        countries.get(28).adjacentCountries = new TreeSet<Country>();
+        countries.get(28).adjacentCountries.add(countries.get(30));
+        countries.get(28).adjacentCountries.add(countries.get(31));
+
+        countries.get(29).adjacentCountries = new TreeSet<Country>();
+        countries.get(29).adjacentCountries.add(countries.get(30));
+        countries.get(29).adjacentCountries.add(countries.get(32));
+
+        countries.get(30).adjacentCountries = new TreeSet<Country>();
+        countries.get(30).adjacentCountries.add(countries.get(31));
+        countries.get(30).adjacentCountries.add(countries.get(32));
+        countries.get(30).adjacentCountries.add(countries.get(33));
+
+        countries.get(31).adjacentCountries = new TreeSet<Country>();
+        countries.get(31).adjacentCountries.add(countries.get(33));
+        countries.get(31).adjacentCountries.add(countries.get(34));
+        countries.get(31).adjacentCountries.add(countries.get(35));
+
+        countries.get(32).adjacentCountries = new TreeSet<Country>();
+        countries.get(32).adjacentCountries.add(countries.get(38));
+
+        countries.get(33).adjacentCountries = new TreeSet<Country>();
+        countries.get(33).adjacentCountries.add(countries.get(34));
+        countries.get(33).adjacentCountries.add(countries.get(36));
+        countries.get(33).adjacentCountries.add(countries.get(37));
+
+        countries.get(34).adjacentCountries = new TreeSet<Country>();
+        countries.get(34).adjacentCountries.add(countries.get(35));
+        countries.get(34).adjacentCountries.add(countries.get(36));
+
+        countries.get(35).adjacentCountries = new TreeSet<Country>();
+        countries.get(35).adjacentCountries.add(countries.get(36));
+
+        countries.get(36).adjacentCountries = new TreeSet<Country>();
+        countries.get(36).adjacentCountries.add(countries.get(37));
+
+        countries.get(37).adjacentCountries = new TreeSet<Country>();
+
+        countries.get(38).adjacentCountries = new TreeSet<Country>();
+        countries.get(38).adjacentCountries.add(countries.get(39));
+        countries.get(38).adjacentCountries.add(countries.get(41));
+
+        countries.get(39).adjacentCountries = new TreeSet<Country>();
+        countries.get(39).adjacentCountries.add(countries.get(40));
+        countries.get(39).adjacentCountries.add(countries.get(41));
+
+        countries.get(40).adjacentCountries = new TreeSet<Country>();
+        countries.get(40).adjacentCountries.add(countries.get(41));
+
+        countries.get(41).adjacentCountries = new TreeSet<Country>();
     }
+
     public void settingsButtonPressed(MouseEvent event) {
         gameMenuController.settingsPressed();
         System.out.println("pressed settings");
