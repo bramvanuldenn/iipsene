@@ -19,6 +19,7 @@ import shared.MenuObserver;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class MainMenuView implements MenuObserver {
@@ -39,9 +40,9 @@ public class MainMenuView implements MenuObserver {
 
     public void setGameMenu() {
         try{
-            this.root = FXMLLoader.load(getClass().getClassLoader().getResource("gamemenu.fxml"));
+            this.root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("gamemenu.fxml")));
             this.stage = (Stage) enteredName.getScene().getWindow();
-            this.scene = new Scene(root, 1000, 800);
+            this.scene = new Scene(root, 930, 580);
             this.stage.setScene(this.scene);
             this.stage.show();
             System.out.println("set game menu");

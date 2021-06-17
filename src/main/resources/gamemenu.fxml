@@ -5,13 +5,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.GameMenuView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.GameMenuView">
    <children>
-      <ImageView fx:id="settingsButton" fitHeight="39.0" fitWidth="38.0" layoutX="6.0" layoutY="8.0" onMouseClicked="#settingsButtonPressed" pickOnBounds="true" preserveRatio="true">
+      <Canvas fx:id="gameCanvas" height="580.0" onMouseClicked="#canvasClicked" width="930.0" />
+      <ImageView fx:id="settingsButton" fitHeight="40.0" fitWidth="40.0" layoutX="6.0" layoutY="8.0" onMouseClicked="#settingsButtonPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@settings-3110.png" />
          </image>
       </ImageView>
-      <Canvas height="800.0" width="1000.0" />
    </children>
 </Pane>
