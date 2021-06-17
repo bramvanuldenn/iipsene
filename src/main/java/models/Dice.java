@@ -11,18 +11,17 @@ import java.util.Random;
  */
 public class Dice implements DiceObservable {
 
-    private int[] diceCol = {1, 2, 3, 4, 5, 6};
+    final int[] diceCol = {1, 2, 3, 4, 5, 6};
     int rolNo; //Roll number aan de dice wanneer hij rolt.
     final Random random = new Random();
     private List<DiceObserver> diceSubscribers = new ArrayList<>();
-    private int i = 0;
 
     public int[] getDiceCol() {
         return diceCol;
     }
 
     public void rolDice() {
-        for (i = 0; i < diceCol.length; i++) {
+        for (int i = 0; i < diceCol.length; i++) {
             diceCol[i] = random.nextInt();
             this.rolNo = getDiceCol()[i];
             System.out.println(rolNo);
