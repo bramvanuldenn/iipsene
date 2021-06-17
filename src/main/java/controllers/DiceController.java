@@ -7,7 +7,7 @@ import views.DiceObserver;
  */
 public class DiceController {
     static DiceController diceController;
-    private Dice dice;
+    final Dice dice;
 
     public DiceController() {
         this.dice = new Dice();
