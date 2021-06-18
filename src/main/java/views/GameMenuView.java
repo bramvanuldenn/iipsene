@@ -27,14 +27,18 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
 
     @FXML
     protected void initialize() {
+        //INIT CONTROLLER
         this.gameMenuController = GameMenuController.getInstance();
+        //INIT OBSERVERS
         this.gameMenuController.registerGameObserver(this);
         this.gameMenuController.registerCountryObserver(this);
         this.gameMenuController.registerDiceObserver(this);
+        //INIT CANVAS
         gc = gameCanvas.getGraphicsContext2D();
         for (int i = 0; i < gameMenuController.getCountries().size(); i++) {
             gameMenuController.drawCountry(gameMenuController.getCountries().get(i));
         }
+        //INIT OTHER WINDOWS
     }
 
     public void settingsButtonPressed(MouseEvent event) {
