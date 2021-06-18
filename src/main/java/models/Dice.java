@@ -6,7 +6,6 @@ import views.DiceObserver;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 /* Dice module gemaakt
  * author: Hayyan Mezher
@@ -15,18 +14,12 @@ public class Dice implements DiceObservable {
 
     final int[] diceCol = {1, 2, 3, 4, 5, 6};
     int rolNo; //Roll number aan de dice wanneer hij rolt.
-    final Random random = new Random();
     private List<DiceObserver> diceSubscribers = new ArrayList<>();
 
-    public int[] getDiceCol() {
-        return diceCol;
-    }
-
-    public int rolDice() {
-        this.rolNo = ThreadLocalRandom.current().nextInt(1,  6+1);
+    public void rolDice() {
+        this.rolNo = diceCol[new Random().nextInt(diceCol.length)];
         System.out.println(rolNo);
         notifyAllObservers();
-        return rolNo;
     }
 
     @Override

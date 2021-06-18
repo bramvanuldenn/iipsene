@@ -20,7 +20,7 @@ public class DiceController {
         return diceController;
     }
 
-    public void setDiceController(){
+    public void setDiceController() {
         dice.rolDice();
     }
 

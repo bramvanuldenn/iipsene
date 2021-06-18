@@ -36,12 +36,12 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
         this.gameMenuController = GameMenuController.getInstance();
         this.gameMenuController.registerGameObserver(this);
         this.gameMenuController.registerCountryObserver(this);
+        this.gameMenuController.subscribersController(this);
         gc = gameCanvas.getGraphicsContext2D();
         for (int i = 0; i < gameMenuController.getCountries().size(); i++) {
             gameMenuController.drawCountry(gameMenuController.getCountries().get(i));
         }
     }
-
 
     public void settingsButtonPressed(MouseEvent event) {
         gameMenuController.settingsPressed();
@@ -50,6 +50,10 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
 
     public void canvasClicked(MouseEvent event) {
         gameMenuController.canvasClicked(event);
+    }
+
+    public void rollDice(MouseEvent event) {
+        diceController.setDiceController();
     }
 
     public void setSettingsVis(boolean state) {

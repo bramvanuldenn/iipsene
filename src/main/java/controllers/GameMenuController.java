@@ -2,9 +2,11 @@ package controllers;
 
 import javafx.scene.input.MouseEvent;
 import models.Country;
+import models.Dice;
 import models.GameMenu;
 import shared.CountryObserver;
 import shared.GameObserver;
+import views.DiceObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +17,16 @@ public class GameMenuController {
     static GameMenuController gameMenuController;
     GameMenu gameMenu;
     Country country;
+    Dice dice;
 
     public GameMenuController() {
         gameMenu = new GameMenu();
         country = new Country();
+        dice = new Dice();
         createCountries();
     }
 
-    public static GameMenuController getInstance(){
+    public static GameMenuController getInstance() {
         if (gameMenuController == null){
             gameMenuController = new GameMenuController();
         }
@@ -59,6 +63,14 @@ public class GameMenuController {
             }
         }
         return null;
+    }
+
+    public void setDiceController() {
+        dice.rolDice();
+    }
+
+    public void subscribersController(DiceObserver diceObserver) {
+        this.dice.registerObserver(diceObserver);
     }
 
     public void drawCountry(Country country) {
