@@ -4,6 +4,8 @@ import javafx.scene.input.MouseEvent;
 import models.Country;
 import models.Dice;
 import models.GameMenu;
+import models.User;
+import services.FirebaseService;
 import shared.CountryObserver;
 import shared.GameObserver;
 import shared.DiceObserver;
@@ -24,6 +26,11 @@ public class GameMenuController {
         country = new Country();
         dice = new Dice();
         createCountries();
+        try {
+            FirebaseService.addCountries(countries);
+        } catch (Exception e) {
+            System.out.println(e);
+        };
     }
 
     public static GameMenuController getInstance() {
@@ -44,6 +51,12 @@ public class GameMenuController {
 
     public void settingsPressed() {
         gameMenu.setSettingsVis();
+        countries.get(0).setCountryOwner(new User(1)); //TEMP
+        try {
+            FirebaseService.updateCountry(countries.get(0));
+        } catch (Exception e) {
+            System.out.println(e);
+        };
     }
 
     public void cardsPressed() {
@@ -292,6 +305,6 @@ public class GameMenuController {
         countries.get(40).adjacentCountries.add(countries.get(41));
 
         countries.get(41).adjacentCountries = new TreeSet<Country>();
-    }
 
+    }
 }

@@ -9,6 +9,12 @@ public class User {
     ArrayList<Double> countryArray;
     ArrayList<Double> cardArray;
 
+    public User(Integer playerId) {
+        this.playerId = playerId;
+    }
+
+    public User() {}
+
     public String getPlayerName() {
         return playerName;
     }

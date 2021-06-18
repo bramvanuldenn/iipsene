@@ -14,21 +14,14 @@ public class Country implements CountryObservable, Comparable<Country> {
 
     private Country country;
     private String countryName;
+    private User countryOwner;
+    private int countryTroops;
     private int countryX;
     private int countryY;
     private int width;
     private int height;
     private Color color = Color.GRAY;
     public Set<Country> adjacentCountries;
-
-    public Country(String countryName, int countryX, int countryY, int width, int height, Color color) {
-        this.countryName = countryName;
-        this.countryX = countryX;
-        this.countryY = countryY;
-        this.width = width;
-        this.height = height;
-        this.color = color;
-    }
 
     public Country(String countryName, int countryX, int countryY, int width, int height) {
         this.countryName = countryName;
@@ -86,6 +79,22 @@ public class Country implements CountryObservable, Comparable<Country> {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public User getCountryOwner() {
+        return countryOwner;
+    }
+
+    public void setCountryOwner(User countryOwner) {
+        this.countryOwner = countryOwner;
+    }
+
+    public int getCountryTroops() {
+        return countryTroops;
+    }
+
+    public void setCountryTroops(int countryTroops) {
+        this.countryTroops = countryTroops;
     }
 
     public void drawCountry(Country country) {

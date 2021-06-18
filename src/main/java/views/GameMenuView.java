@@ -41,15 +41,18 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     protected void initialize() {
         //INIT CONTROLLER
         this.gameMenuController = GameMenuController.getInstance();
+
         //INIT OBSERVERS
         this.gameMenuController.registerGameObserver(this);
         this.gameMenuController.registerCountryObserver(this);
         this.gameMenuController.registerDiceObserver(this);
-        //INIT CANVAS
+
+        //INIT CANVAS AND DRAW COUNTRIES
         gc = gameCanvas.getGraphicsContext2D();
         for (int i = 0; i < gameMenuController.getCountries().size(); i++) {
             gameMenuController.drawCountry(gameMenuController.getCountries().get(i));
         }
+
         //INIT OTHER WINDOWS
         settingsWindow = createWindow("settingsmenu.fxml", "Settings");
         settingsWindow.setOnCloseRequest(e -> {
@@ -161,6 +164,5 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     @Override
     public void update(int rolNo) {
         this.displayDiceRoll(rolNo);
-        System.out.println(rolNo);
     }
 }

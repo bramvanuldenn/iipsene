@@ -18,7 +18,6 @@ public class Dice implements DiceObservable {
 
     public void rolDice() {
         this.rolNo = diceCol[new Random().nextInt(diceCol.length)];
-        System.out.println(rolNo);
         notifyAllObservers();
     }
 
