@@ -1,15 +1,11 @@
 package services;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.WriteBatch;
-import com.google.cloud.firestore.WriteResult;
+import com.google.cloud.firestore.*;
 import models.Country;
 import models.User;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,10 +15,9 @@ import java.util.concurrent.ExecutionException;
 
 public class FirebaseService {
 
-
     public static boolean addPlayer(String playerName) throws ExecutionException, InterruptedException, NullPointerException, IOException {
         User newUser = new User();
-        Integer idNum = 0;
+        Integer idNum;
         DocumentReference snapshot = InitFirebase.getDbInstance().collection("players").document("info");
         ApiFuture<DocumentSnapshot> future = snapshot.get();
         Map<String, Object> map = future.get().getData();
@@ -44,23 +39,19 @@ public class FirebaseService {
         System.out.println("Added user: " + docRef.get());
         future = snapshot.get();
         map = future.get().getData();
-        if (map.containsKey(String.valueOf(newUser.getPlayerId()))) {
-            return true;
-        }
-        return false;
+        return map.containsKey(String.valueOf(newUser.getPlayerId()));
     }
 
 
     public static void addCountries(ArrayList<Country> countries) throws IOException, ExecutionException, InterruptedException {
-        for (int i = 0; i < countries.size(); i++) {
-
+        for (Country country : countries) {
             Map<String, Object> countryData = new HashMap<>();
-            countryData.put("countryTroops", countries.get(i).getCountryTroops());
-            countryData.put("countryOwner", countries.get(i).getCountryOwner());
+            countryData.put("countryTroops", country.getCountryTroops());
+            countryData.put("countryOwner", country.getCountryOwner());
 
             ApiFuture<WriteResult> future = InitFirebase.getDbInstance()
                     .collection("countries")
-                    .document(countries.get(i).getCountryName())
+                    .document(country.getCountryName())
                     .set(countryData);
             System.out.println(future.get().getUpdateTime());
         }
@@ -75,5 +66,21 @@ public class FirebaseService {
         for (WriteResult result : future.get()) {
             System.out.println("Update time: " + result.getUpdateTime());
         }
+    }
+
+    public static void addListener(String collection, String document) throws IOException, ExecutionException, InterruptedException {
+        DocumentReference docRef = InitFirebase.getDbInstance().collection(collection).document(document);
+        docRef.addSnapshotListener((snapshot, e) -> {
+            if (e != null) {
+                System.err.println("Listen failed: " + e);
+                return;
+            }
+            if (snapshot != null && snapshot.exists()) {
+                System.out.println("Current data: " + snapshot.getData());
+
+            } else {
+                System.out.print("Current data: null");
+            }
+        });
     }
 }

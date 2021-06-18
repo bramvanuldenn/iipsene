@@ -4,6 +4,6 @@ package shared;
  *
  */
 public interface CountryObservable {
-    public void register(CountryObserver observer);
-    public void notifyAllObservers();
+    void register(CountryObserver observer);
+    void notifyAllObservers();
 }

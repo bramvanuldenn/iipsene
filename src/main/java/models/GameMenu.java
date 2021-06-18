@@ -12,7 +12,7 @@ public class GameMenu implements GameObservable {
     private boolean cardsVisible = true;
     private boolean playerVisible = true;
 
-    private List<GameObserver> observers = new ArrayList<GameObserver>();
+    private List<GameObserver> observers = new ArrayList<>();
 
     public GameMenu() {
     }

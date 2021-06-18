@@ -10,7 +10,7 @@ import java.util.Set;
 
 
 public class Country implements CountryObservable, Comparable<Country> {
-    private List<CountryObserver> observers = new ArrayList<CountryObserver>();
+    private List<CountryObserver> observers = new ArrayList<>();
 
     private Country country;
     private String countryName;

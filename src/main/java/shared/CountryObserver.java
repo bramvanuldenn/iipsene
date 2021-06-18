@@ -3,5 +3,5 @@ package shared;
 import models.Country;
 
 public interface CountryObserver {
-    public void update(Country country);
+    void update(Country country);
 }

@@ -2,32 +2,22 @@ package views;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import controllers.MainMenuController;
-import javafx.stage.Window;
 import services.FirebaseService;
 import shared.MenuObservable;
 import shared.MenuObserver;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class MainMenuView implements MenuObserver {
     MainMenuController mainMenuController;
-
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
     @FXML
     TextField enteredName = new TextField();
@@ -40,19 +30,19 @@ public class MainMenuView implements MenuObserver {
 
     public void setGameMenu() {
         try{
-            this.root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("gamemenu.fxml")));
-            this.stage = (Stage) enteredName.getScene().getWindow();
-            this.scene = new Scene(root, 930, 580);
-            this.stage.setScene(this.scene);
-            this.stage.show();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("gamemenu.fxml")));
+            Stage stage = (Stage) enteredName.getScene().getWindow();
+            Scene scene = new Scene(root, 930, 580);
+            stage.setScene(scene);
+            stage.show();
             System.out.println("set game menu");
         } catch (IOException ex) {
             System.err.println("Error reading file: " + ex);
         }
     }
 
-    public void startGamePressed(MouseEvent event) throws IOException, ExecutionException, InterruptedException {
-        String userName = enteredName.getText().toString();
+    public void startGamePressed() throws IOException, ExecutionException, InterruptedException {
+        String userName = enteredName.getText();
         if (userName != null && !userName.isEmpty()) {
             if (FirebaseService.addPlayer(userName)) {
                 mainMenuController.setGameMenu();

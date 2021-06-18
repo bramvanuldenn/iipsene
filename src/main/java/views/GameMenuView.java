@@ -17,6 +17,8 @@ import shared.CountryObserver;
 import shared.DiceObserver;
 import shared.GameObserver;
 
+import java.util.Objects;
+
 public class GameMenuView implements GameObserver, CountryObserver, DiceObserver {
     GameMenuController gameMenuController;
 
@@ -73,7 +75,7 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
 
     public Stage createWindow(String windowFile, String windowName) {
         try {
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(windowFile));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource(windowFile)));
             Stage stage = new Stage();
             stage.setTitle(windowName);
             stage.setScene(new Scene(root));
@@ -86,15 +88,15 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
 
     //EVENT HANDLERS
 
-    public void settingsButtonPressed(MouseEvent event) {
+    public void settingsButtonPressed() {
         gameMenuController.settingsPressed();
     }
 
-    public void cardsButtonPressed(MouseEvent event) {
+    public void cardsButtonPressed() {
         gameMenuController.cardsPressed();
     }
 
-    public void playerButtonPressed(MouseEvent event) {
+    public void playerButtonPressed() {
         gameMenuController.playerPressed();
     }
 
@@ -102,7 +104,7 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
         gameMenuController.canvasClicked(event);
     }
 
-    public void rollDice(MouseEvent event) {
+    public void rollDice() {
         gameMenuController.rollDice();
     }
 
