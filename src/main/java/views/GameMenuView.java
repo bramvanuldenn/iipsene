@@ -2,12 +2,16 @@ package views;
 
 import controllers.GameMenuController;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import models.Country;
 import shared.CountryObserver;
 import shared.DiceObserver;
@@ -19,11 +23,19 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     @FXML
     ImageView settingsButton;
     @FXML
+    ImageView cardsButton;
+    @FXML
+    ImageView playerButton;
+    @FXML
     Canvas gameCanvas;
     @FXML
     private Label diceRollLabel;
 
     private GraphicsContext gc;
+
+    private Stage settingsWindow;
+    private Stage cardsWindow;
+    private Stage playerWindow;
 
     @FXML
     protected void initialize() {
@@ -39,11 +51,48 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
             gameMenuController.drawCountry(gameMenuController.getCountries().get(i));
         }
         //INIT OTHER WINDOWS
+        settingsWindow = createWindow("settingsmenu.fxml", "Settings");
+        settingsWindow.setOnCloseRequest(e -> {
+            e.consume();
+            gameMenuController.settingsPressed();
+        });
+        cardsWindow = createWindow("cardsmenu.fxml", "Cards");
+        cardsWindow.setOnCloseRequest(e -> {
+            e.consume();
+            gameMenuController.cardsPressed();
+        });
+        playerWindow = createWindow("playermenu.fxml", "Players");
+        playerWindow.setOnCloseRequest(e -> {
+            e.consume();
+            gameMenuController.playerPressed();
+        });
     }
+
+    public Stage createWindow(String windowFile, String windowName) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource(windowFile));
+            Stage stage = new Stage();
+            stage.setTitle(windowName);
+            stage.setScene(new Scene(root));
+            return stage;
+        } catch (Exception e) {
+            System.out.println("Error loading window " + windowFile + "due to: " + e);
+            return null;
+        }
+    }
+
+    //EVENT HANDLERS
 
     public void settingsButtonPressed(MouseEvent event) {
         gameMenuController.settingsPressed();
-        System.out.println("pressed settings");
+    }
+
+    public void cardsButtonPressed(MouseEvent event) {
+        gameMenuController.cardsPressed();
+    }
+
+    public void playerButtonPressed(MouseEvent event) {
+        gameMenuController.playerPressed();
     }
 
     public void canvasClicked(MouseEvent event) {
@@ -54,11 +103,35 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
         gameMenuController.rollDice();
     }
 
+
+    //HANDLE DRAWING
     public void setSettingsVis(boolean state) {
         if (state) {
-            settingsButton.setOpacity(0.0);
-        } else {
+            settingsWindow.hide();
             settingsButton.setOpacity(1.0);
+        } else {
+            settingsWindow.show();
+            settingsButton.setOpacity(0.0);
+        }
+    }
+
+    public void setCardsVis(boolean state) {
+        if (state) {
+            cardsWindow.hide();
+            cardsButton.setOpacity(1.0);
+        } else {
+            cardsWindow.show();
+            cardsButton.setOpacity(0.0);
+        }
+    }
+
+    public void setPlayerVis(boolean state) {
+        if (state) {
+            playerWindow.hide();
+            playerButton.setOpacity(1.0);
+        } else {
+            playerWindow.show();
+            playerButton.setOpacity(0.0);
         }
     }
 
@@ -74,8 +147,10 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     }
 
     @Override
-    public void update(boolean state) {
-        setSettingsVis(state);
+    public void update(boolean settingsVisState, boolean cardsVisState, boolean playerVisState) {
+        setSettingsVis(settingsVisState);
+        setCardsVis(cardsVisState);
+        setPlayerVis(playerVisState);
     }
 
     @Override

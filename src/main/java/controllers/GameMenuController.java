@@ -43,7 +43,15 @@ public class GameMenuController {
     public void registerDiceObserver(DiceObserver diceObserver) { this.dice.registerObserver(diceObserver); }
 
     public void settingsPressed() {
-        gameMenu.setSettingsVis(gameMenu.isSettingsVisible());
+        gameMenu.setSettingsVis();
+    }
+
+    public void cardsPressed() {
+        gameMenu.setCardsVis();
+    }
+
+    public void playerPressed() {
+        gameMenu.setPlayerVis();
     }
 
     public void canvasClicked(MouseEvent e) {
