@@ -1,4 +1,4 @@
-package views;
+package shared;
 /* Dice observer gemaakt
  * author: Hayyan Mezher
  */

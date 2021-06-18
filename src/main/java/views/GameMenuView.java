@@ -1,7 +1,6 @@
 package views;
 
 import controllers.GameMenuController;
-import controllers.DiceController;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -11,11 +10,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import models.Country;
 import shared.CountryObserver;
+import shared.DiceObserver;
 import shared.GameObserver;
 
 public class GameMenuView implements GameObserver, CountryObserver, DiceObserver {
     GameMenuController gameMenuController;
-    DiceController diceController;
 
     @FXML
     ImageView settingsButton;
@@ -23,11 +22,6 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     Canvas gameCanvas;
     @FXML
     private Label diceRollLabel;
-    @FXML
-    public void rollDice() throws NullPointerException{
-        this.diceController = DiceController.getInstance();
-        this.diceController.setDiceController();
-    }
 
     private GraphicsContext gc;
 
@@ -36,7 +30,7 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
         this.gameMenuController = GameMenuController.getInstance();
         this.gameMenuController.registerGameObserver(this);
         this.gameMenuController.registerCountryObserver(this);
-        this.gameMenuController.subscribersController(this);
+        this.gameMenuController.registerDiceObserver(this);
         gc = gameCanvas.getGraphicsContext2D();
         for (int i = 0; i < gameMenuController.getCountries().size(); i++) {
             gameMenuController.drawCountry(gameMenuController.getCountries().get(i));
@@ -53,7 +47,7 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     }
 
     public void rollDice(MouseEvent event) {
-        diceController.setDiceController();
+        gameMenuController.rollDice();
     }
 
     public void setSettingsVis(boolean state) {

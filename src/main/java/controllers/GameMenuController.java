@@ -6,7 +6,7 @@ import models.Dice;
 import models.GameMenu;
 import shared.CountryObserver;
 import shared.GameObserver;
-import views.DiceObserver;
+import shared.DiceObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +40,7 @@ public class GameMenuController {
     public void registerCountryObserver(CountryObserver abc) {
         this.country.register(abc);
     }
+    public void registerDiceObserver(DiceObserver diceObserver) { this.dice.registerObserver(diceObserver); }
 
     public void settingsPressed() {
         gameMenu.setSettingsVis(gameMenu.isSettingsVisible());
@@ -65,12 +66,8 @@ public class GameMenuController {
         return null;
     }
 
-    public void setDiceController() {
+    public void rollDice() {
         dice.rolDice();
-    }
-
-    public void subscribersController(DiceObserver diceObserver) {
-        this.dice.registerObserver(diceObserver);
     }
 
     public void drawCountry(Country country) {

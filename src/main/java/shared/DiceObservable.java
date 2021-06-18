@@ -1,6 +1,5 @@
 package shared;
 
-import views.DiceObserver;
 /* Dice observable gemaakt
  * author: Hayyan Mezher
  */

@@ -1,7 +1,7 @@
 package models;
 
 import shared.DiceObservable;
-import views.DiceObserver;
+import shared.DiceObserver;
 
 import java.util.ArrayList;
 import java.util.List;
