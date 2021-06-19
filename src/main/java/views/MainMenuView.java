@@ -1,5 +1,7 @@
 package views;
 
+import com.google.cloud.firestore.DocumentReference;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,10 +11,12 @@ import javafx.stage.Stage;
 
 import controllers.MainMenuController;
 import services.FirebaseService;
+import services.InitFirebase;
 import shared.MenuObservable;
 import shared.MenuObserver;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
@@ -21,6 +25,9 @@ public class MainMenuView implements MenuObserver {
 
     @FXML
     TextField enteredName = new TextField();
+
+    Boolean hasClickedStart = false;
+    Boolean canStartGame = false;
 
     @FXML
     protected void initialize(){
@@ -41,12 +48,29 @@ public class MainMenuView implements MenuObserver {
         }
     }
 
+    public interface firebaseCallback {
+        void onCallback(Map value);
+    }
+
     public void startGamePressed() throws IOException, ExecutionException, InterruptedException {
+        if (hasClickedStart) {return;}
+        hasClickedStart = true;
         String userName = enteredName.getText();
         if (userName != null && !userName.isEmpty()) {
-            if (FirebaseService.addPlayer(userName)) {
-                mainMenuController.setGameMenu();
-            }
+            FirebaseService.addPlayer(userName);
+            FirebaseService.addUsersListener(new firebaseCallback() {
+                @Override
+                public void onCallback(Map value) {
+                    if (value.size() >= 4) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                mainMenuController.setGameMenu();
+                            }
+                        });
+                    }
+                }
+            });
         } else {
             enteredName.setText("Please Enter a valid username!");
         }

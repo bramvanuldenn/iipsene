@@ -16,29 +16,19 @@ public class Country implements CountryObservable, Comparable<Country> {
     private Country country;
     private String countryName;
     private User countryOwner;
-    private int countryTroops;
+    private int countryTroops = 0;
     private int countryX;
     private int countryY;
-
-    public int getCountryZ() {
-        return countryZ;
-    }
-
-    public void setCountryZ(int countryZ) {
-        this.countryZ = countryZ;
-    }
-
-    private int countryZ;
     private int width;
     private int height;
     private Color color = Color.GRAY;
+    private boolean countrySelected = false;
     public Set<Country> adjacentCountries;
 
-    public Country(String countryName, int countryX, int countryY, int countryZ, int width, int height) {
+    public Country(String countryName, int countryX, int countryY, int width, int height) {
         this.countryName = countryName;
         this.countryX = countryX;
         this.countryY = countryY;
-        this.countryZ = countryZ;
         this.width = width;
         this.height = height;
     }
@@ -109,6 +99,14 @@ public class Country implements CountryObservable, Comparable<Country> {
 
     public void setCountryTroops(int countryTroops) {
         this.countryTroops = countryTroops;
+    }
+
+    public boolean isCountrySelected() {
+        return countrySelected;
+    }
+
+    public void setCountrySelected(boolean countrySelected) {
+        this.countrySelected = countrySelected;
     }
 
     public void drawCountry(Country country) {

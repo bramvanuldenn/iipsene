@@ -52,11 +52,12 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
         this.gameMenuController.registerDiceObserver(this);
         this.gameMenuController.registerUserObserver(this);
 
+        //CREATE ALL USER OBJECTS
+        //TODO
+
         //INIT CANVAS AND DRAW COUNTRIES
         gc = gameCanvas.getGraphicsContext2D();
-        for (int i = 0; i < gameMenuController.getCountries().size(); i++) {
-            gameMenuController.drawCountry(gameMenuController.getCountries().get(i));
-        }
+        updateCanvas();
 
         //INIT OTHER WINDOWS
         settingsWindow = createWindow("settingsMenu.fxml", "Settings");
@@ -144,10 +145,23 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     }
 
     public void drawCountry(Country country) {
-        gc.setFill(Color.BLACK);
-        gc.fillRect(country.getCountryX()-1, country.getCountryY()-1, country.getWidth()+3, country.getHeight()+3);
+        if (country.isCountrySelected()) {
+            gc.setFill(Color.LIGHTYELLOW);
+        } else {
+            gc.setFill(Color.BLACK);
+        }
+        gc.fillRect(country.getCountryX()-1, country.getCountryY()-1, country.getWidth()+2, country.getHeight()+2);
         gc.setFill(country.getColor());
         gc.fillRect(country.getCountryX(), country.getCountryY(), country.getWidth(), country.getHeight());
+    }
+
+    // CALL DEZE FUNCTIE ELKE KEER NADAT JE EEN COUNTRY HEBT GEUPDATE, DIT RERENDERT DE HELE SCENE.
+    public void updateCanvas() {
+        gc.setFill(Color.BLUE);
+        gc.fillRect(0,0,930,580);
+        for (int i = 0; i < gameMenuController.getCountries().size(); i++) {
+            gameMenuController.drawCountry(gameMenuController.getCountries().get(i));
+        }
     }
 
     public void displayDiceRoll(int rolNo){
@@ -159,6 +173,7 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
         setSettingsVis(settingsVisState);
         setCardsVis(cardsVisState);
         setPlayerVis(playerVisState);
+        updateCanvas();
     }
 
     @Override

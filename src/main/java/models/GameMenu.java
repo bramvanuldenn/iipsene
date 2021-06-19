@@ -11,6 +11,7 @@ public class GameMenu implements GameObservable {
     private boolean settingsVisible = true;
     private boolean cardsVisible = true;
     private boolean playerVisible = true;
+    ArrayList<User> users = new ArrayList<>();
 
     private List<GameObserver> observers = new ArrayList<>();
 
@@ -56,6 +57,10 @@ public class GameMenu implements GameObservable {
         notifyAllObservers();
     }
 
+    public void updateCanvas() {
+        notifyAllObservers();
+    }
+
     public void register(GameObserver observer) {
         observers.add(observer);
     }
@@ -65,4 +70,5 @@ public class GameMenu implements GameObservable {
             s.update(isSettingsVisible(), isCardsVisible(), isPlayerVisible());
         }
     }
+
 }
