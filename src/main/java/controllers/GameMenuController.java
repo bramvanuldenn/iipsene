@@ -123,7 +123,7 @@ public class GameMenuController {
         countries.add(new Country("East Africa", 480, 280, 80, 110));
         countries.add(new Country("Congo", 420, 330, 60, 60));
         countries.add(new Country("South Africa", 450, 390, 80, 110));
-        countries.add(new Country("Middle East", 550, 180, 110, 70));
+        countries.add(new Country("Syria", 550, 180, 110, 70));
         countries.add(new Country("Afghanistan", 630, 110, 70, 70));
         countries.add(new Country("Ural", 630, 55, 80, 55));
         countries.add(new Country("India", 660, 180, 60, 100));

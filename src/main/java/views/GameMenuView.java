@@ -56,17 +56,17 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
         }
 
         //INIT OTHER WINDOWS
-        settingsWindow = createWindow("settingsmenu.fxml", "Settings");
+        settingsWindow = createWindow("settingsMenu.fxml", "Settings");
         settingsWindow.setOnCloseRequest(e -> {
             e.consume();
             gameMenuController.settingsPressed();
         });
-        cardsWindow = createWindow("cardsmenu.fxml", "Cards");
+        cardsWindow = createWindow("cardsMenu.fxml", "Cards");
         cardsWindow.setOnCloseRequest(e -> {
             e.consume();
             gameMenuController.cardsPressed();
         });
-        playerWindow = createWindow("playermenu.fxml", "Players");
+        playerWindow = createWindow("playerMenu.fxml", "Players");
         playerWindow.setOnCloseRequest(e -> {
             e.consume();
             gameMenuController.playerPressed();

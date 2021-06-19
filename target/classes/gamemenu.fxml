@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.GameMenuView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.GameMenuView">
    <children>
       <Canvas fx:id="gameCanvas" height="580.0" onMouseClicked="#canvasClicked" width="930.0" />
       <ImageView fx:id="settingsButton" fitHeight="40.0" fitWidth="40.0" layoutX="8.0" layoutY="8.0" onMouseClicked="#settingsButtonPressed" pickOnBounds="true" preserveRatio="true">
@@ -26,6 +24,6 @@
          </image>
       </ImageView>
       <Button layoutX="432.0" layoutY="540.0" mnemonicParsing="false" onMouseClicked="#rollDice" text="Roll Dice!" />
-      <Label fx:id="diceRollLabel" layoutX="451.0" layoutY="459.0" />
+      <Label fx:id="diceRollLabel" layoutX="459.0" layoutY="509.0" prefHeight="17.0" prefWidth="11.0" />
    </children>
 </Pane>
