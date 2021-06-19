@@ -13,13 +13,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import models.Country;
+import models.User;
 import shared.CountryObserver;
 import shared.DiceObserver;
 import shared.GameObserver;
+import shared.UserObserver;
 
 import java.util.Objects;
 
-public class GameMenuView implements GameObserver, CountryObserver, DiceObserver {
+public class GameMenuView implements GameObserver, CountryObserver, DiceObserver, UserObserver {
     GameMenuController gameMenuController;
 
     @FXML
@@ -48,6 +50,7 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
         this.gameMenuController.registerGameObserver(this);
         this.gameMenuController.registerCountryObserver(this);
         this.gameMenuController.registerDiceObserver(this);
+        this.gameMenuController.registerUserObserver(this);
 
         //INIT CANVAS AND DRAW COUNTRIES
         gc = gameCanvas.getGraphicsContext2D();
@@ -166,5 +169,10 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     @Override
     public void update(int rolNo) {
         this.displayDiceRoll(rolNo);
+    }
+
+    @Override
+    public void update(User user) {
+        update(user);
     }
 }

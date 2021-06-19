@@ -28,7 +28,7 @@ public class Dice implements DiceObservable {
 
     @Override
     public void notifyAllObservers() {
-        for (DiceObserver observer: this.diceSubscribers){
+        for (DiceObserver observer: this.diceSubscribers) {
             observer.update(rolNo);
 
         }

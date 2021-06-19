@@ -1,6 +1,7 @@
 package models;
 
 import javafx.scene.paint.Color;
+
 import shared.CountryObservable;
 import shared.CountryObserver;
 
@@ -18,20 +19,33 @@ public class Country implements CountryObservable, Comparable<Country> {
     private int countryTroops;
     private int countryX;
     private int countryY;
+
+    public int getCountryZ() {
+        return countryZ;
+    }
+
+    public void setCountryZ(int countryZ) {
+        this.countryZ = countryZ;
+    }
+
+    private int countryZ;
     private int width;
     private int height;
     private Color color = Color.GRAY;
     public Set<Country> adjacentCountries;
 
-    public Country(String countryName, int countryX, int countryY, int width, int height) {
+    public Country(String countryName, int countryX, int countryY, int countryZ, int width, int height) {
         this.countryName = countryName;
         this.countryX = countryX;
         this.countryY = countryY;
+        this.countryZ = countryZ;
         this.width = width;
         this.height = height;
     }
 
-    public Country() {}
+    public Country() {
+
+    }
 
     public String getCountryName() {
         return countryName;
