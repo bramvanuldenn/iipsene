@@ -153,7 +153,13 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
             gc.setFill(Color.BLACK);
         }
         gc.fillRect(country.getCountryX()-1, country.getCountryY()-1, country.getWidth()+2, country.getHeight()+2);
-        gc.setFill(country.getColor());
+        if (country.getCountryOwner() == null) {
+            System.out.println(country.getCountryName() + " has no owner");
+            gc.setFill(country.getColor());
+        } else {
+            System.out.println(country.getCountryName() + " becomes " + country.getCountryOwner().getColor().toString());
+            gc.setFill(country.getCountryOwner().getColor());
+        }
         gc.fillRect(country.getCountryX(), country.getCountryY(), country.getWidth(), country.getHeight());
     }
 

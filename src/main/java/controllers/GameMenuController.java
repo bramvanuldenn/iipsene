@@ -20,6 +20,10 @@ public class GameMenuController {
     Country country;
     User user;
     Dice dice;
+    private static Country selectedCountry;
+    private static User[] Users;
+    private static int turn = 0;
+
 
     public GameMenuController() {
         gameMenu = new GameMenu();
@@ -81,7 +85,21 @@ public class GameMenuController {
             System.out.println("Clicked country " + clickedCountry.getCountryName());
         }
     }
+    public void selectUserCountry(){
+        /* selects a country and stores it given that the current player owns it
+         * @param mouse for the mouse click location
+         */
+        for (Country c : countries) {
+            //to be uncommented when turns are a thing
+//            if (c.inBounds(mouse) && c.numSoldiers > 1) {
+                selectedCountry = c;
+//                nextMode();
+//            }
+        }
+    }
+    public void selectEnemyCountry(){
 
+    }
     public Country getCountry(double clickX, double clickY){
         for (Country c : gameMenu.getCountries()) {
             if (    clickX >= c.getCountryX() &&
