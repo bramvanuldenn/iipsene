@@ -52,7 +52,7 @@ public class MainMenuView implements MenuObserver {
         void onCallback(Map value);
     }
 
-    public void startGamePressed() throws IOException, ExecutionException, InterruptedException {
+    public void startGamePressed() throws Exception {
         if (hasClickedStart) {return;}
         hasClickedStart = true;
         String userName = enteredName.getText();
@@ -62,6 +62,16 @@ public class MainMenuView implements MenuObserver {
                 @Override
                 public void onCallback(Map value) {
                     if (value.size() >= 4) {
+                        //assign countries to players and save to firebase
+                        try {
+                            FirebaseService.assignCountries();
+                        } catch (Exception err) {
+                            System.out.println("Fatal error: " + err.getMessage());
+                            err.printStackTrace();
+                            return;
+                        }
+                        //todo implement here
+                        //start the game on every1's platform
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
