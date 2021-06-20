@@ -145,14 +145,14 @@ public class GameMenuController {
 
                     System.out.println("this your country, bitchyWitch");
                     for (int i = 0; i <= 2; i++) {
-                        myCountry.put(clickedCountry, "country" + i);
+                        myCountry.put(clickedCountry, "country_" + i);
                         System.out.println(myCountry);
                     }
                     //Select another country to transport troops.
                 } else {
                     System.out.println("this is not your country dumbass");
                 }
-            } //move troops from country 1 to country 2
+            } //move troops from country_1 to country_2
         }
     }
 }
