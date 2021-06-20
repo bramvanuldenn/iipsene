@@ -15,15 +15,20 @@ import javafx.stage.Stage;
 import models.Country;
 import models.GameMenu;
 import models.User;
+import services.FirebaseService;
 import shared.CountryObserver;
 import shared.DiceObserver;
 import shared.GameObserver;
 import shared.UserObserver;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class GameMenuView implements GameObserver, CountryObserver, DiceObserver, UserObserver {
     GameMenuController gameMenuController;
+    GameMenu gameMenu;
+    User user;
 
     @FXML
     ImageView settingsButton;
@@ -43,7 +48,7 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     private Stage playerWindow;
 
     @FXML
-    protected void initialize() {
+    protected void initialize() throws Exception {
         //INIT CONTROLLER
         this.gameMenuController = GameMenuController.getInstance();
 
@@ -54,7 +59,8 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
         this.gameMenuController.registerUserObserver(this);
 
         //CREATE ALL USER OBJECTS
-        //TODO
+        List<User> userList = FirebaseService.fetchPlayers();
+        user.setUserlist(FirebaseService.selectLastFourPlayers(userList));
 
         //INIT CANVAS AND DRAW COUNTRIES
         gc = gameCanvas.getGraphicsContext2D();
