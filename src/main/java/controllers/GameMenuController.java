@@ -15,6 +15,7 @@ import shared.DiceObserver;
 import shared.UserObserver;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GameMenuController {
@@ -90,6 +91,7 @@ public class GameMenuController {
             updateCanvas();
             drawCountry(clickedCountry);
             System.out.println("Clicked country " + clickedCountry.getCountryName());
+            moveTroops(e);
         }
     }
     public void selectUserCountry(){
@@ -131,23 +133,26 @@ public class GameMenuController {
         this.gameMenu.updateCanvas();
     }
 
-    public void moveTroops() {
+    public void moveTroops(MouseEvent e) throws NullPointerException {
 
-        ArrayList myCountry = new ArrayList();
+        HashMap myCountry = new HashMap();
+        Country clickedCountry = getCountry(e.getX(), e.getY());
+        if (clickedCountry != null) {
 
-        if (country.isCountrySelected()) {
-
-            while (myCountry.size() < 2){
+            while (myCountry.size() < 2) {
 
                 if (country.getCountryOwner().toString().equals(user.getPlayerName())) {
+
                     System.out.println("this your country, bitchyWitch");
-                    myCountry.add(country.isCountrySelected());
-                    System.out.println(myCountry);
+                    for (int i = 0; i <= 2; i++) {
+                        myCountry.put(clickedCountry, "country" + i);
+                        System.out.println(myCountry);
+                    }
                     //Select another country to transport troops.
                 } else {
                     System.out.println("this is not your country dumbass");
                 }
-            }
+            } //move troops from country 1 to country 2
         }
     }
 }

@@ -8,16 +8,20 @@ import java.util.*;
 
 public class User implements UserObservable, UserObserver {
 
-    String playerName;
-    Integer playerId;
-    ArrayList<Double> countryArray;
-    ArrayList<Double> cardArray;
-    ArrayList<UserObserver> userObserver = new ArrayList<>();
+    private String playerName;
+    private Integer playerId;
+    private ArrayList<Double> countryArray;
+    private ArrayList<Double> cardArray;
+    private ArrayList<UserObserver> userObserver = new ArrayList<>();
     private User user;
     private Color color;
 
-    public User(Integer playerId) {
-        this.playerId = playerId;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public User() {}
