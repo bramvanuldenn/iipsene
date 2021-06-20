@@ -7,7 +7,6 @@ import shared.MenuObserver;
 public class MainMenuController {
     static MainMenuController mainMenuController;
     MainMenu menu;
-    Dice diceControl;
 
     private MainMenuController() {
         menu = new MainMenu();

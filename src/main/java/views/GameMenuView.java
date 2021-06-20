@@ -16,14 +16,12 @@ import javafx.stage.Stage;
 
 import models.Country;
 import models.User;
-import services.FirebaseService;
+
 import shared.CountryObserver;
 import shared.DiceObserver;
 import shared.GameObserver;
 import shared.UserObserver;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class GameMenuView implements GameObserver, CountryObserver, DiceObserver, UserObserver {

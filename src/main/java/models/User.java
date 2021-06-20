@@ -1,7 +1,6 @@
 package models;
 
 import javafx.scene.paint.Color;
-import shared.DiceObserver;
 import shared.UserObservable;
 import shared.UserObserver;
 
@@ -13,7 +12,7 @@ public class User implements UserObservable, UserObserver {
     private Integer playerId;
     private ArrayList<Double> countryArray;
     private ArrayList<Double> cardArray;
-    private List<User> userlist;
+    private List<User> userList;
     private ArrayList<UserObserver> userObserver = new ArrayList<>();
     private User user;
     private Color color;
@@ -65,11 +64,11 @@ public class User implements UserObservable, UserObserver {
     }
 
     public List<User> getUserlist() {
-        return userlist;
+        return userList;
     }
 
     public void setUserlist(List<User> userlist) {
-        this.userlist = userlist;
+        this.userList = userlist;
     }
 
     public Color getColor() {

@@ -11,7 +11,7 @@ public class GameMenuControllerTest {
     @Test
     public void clickOnCountry() throws Exception {
         GameMenuController controller = new GameMenuController();
-        Country country = controller.getCountries().get(0);
+        Country country = controller.getGameMenuController().get(0);
         //klikken er beetje naast, geen enkel land is kleiner dan 10 :)
         double clickX = country.getCountryX() + 5;
         double clickY = country.getCountryY() + 5;

@@ -75,7 +75,7 @@ public class FirebaseService {
         ApiFuture<List<WriteResult>> future = batch.commit();
     }
 
-    private static List<User> selectLastFourPlayers(List<User> fetchPlayers) {
+    public static List<User> selectLastFourPlayers(List<User> fetchPlayers) {
         List<User> selectedPlayers = new ArrayList<>();
         Collections.sort(fetchPlayers, Comparator.comparing(User::getPlayerId));
         Collections.reverse(fetchPlayers);
