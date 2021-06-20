@@ -1,6 +1,5 @@
 package views;
 
-import com.google.cloud.firestore.DocumentReference;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,14 +10,12 @@ import javafx.stage.Stage;
 
 import controllers.MainMenuController;
 import services.FirebaseService;
-import services.InitFirebase;
 import shared.MenuObservable;
 import shared.MenuObserver;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
 
 public class MainMenuView implements MenuObserver {
     MainMenuController mainMenuController;
@@ -64,6 +61,7 @@ public class MainMenuView implements MenuObserver {
                     if (value.size() >= 4) {
                         //assign countries to players and save to firebase
                         try {
+                            System.out.println("Starting game");
                             FirebaseService.assignCountries();
                         } catch (Exception err) {
                             System.out.println("Fatal error: " + err.getMessage());

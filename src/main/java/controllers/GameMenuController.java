@@ -14,9 +14,6 @@ import shared.GameObserver;
 import shared.DiceObserver;
 import shared.UserObserver;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 public class GameMenuController {
     static GameMenuController gameMenuController;
     GameMenu gameMenu;
@@ -61,9 +58,7 @@ public class GameMenuController {
         this.dice.registerObserver(diceObserver);
     }
 
-    public void registerUserObserver(UserObserver userObserver) {
-        this.user.registerObserver(userObserver);
-    }
+    public void registerUserObserver(UserObserver userObserver) { this.user.registerObserver(userObserver);}
 
     public void settingsPressed() {
         gameMenu.setSettingsVis();
@@ -105,7 +100,6 @@ public class GameMenuController {
     public void selectEnemyCountry(){
 
     }
-
     public Country getCountry(double clickX, double clickY){
         for (Country c : gameMenu.getCountries()) {
             if (    clickX >= c.getCountryX() &&
@@ -130,23 +124,10 @@ public class GameMenuController {
         this.gameMenu.updateCanvas();
     }
 
-    public void moveTroops() {
-
-        ArrayList myCountry = new ArrayList();
-
-        if (country.isCountrySelected()) {
-
-            while (myCountry.size() < 2){
-
-                if (country.getCountryOwner().toString().equals(user.getPlayerName())) {
-                    System.out.println("this your country, bitchyWitch");
-                    myCountry.add(country.isCountrySelected());
-                    System.out.println(myCountry);
-                    //Select another country to transport troops.
-                } else {
-                    System.out.println("this is not your country dumbass");
-                }
-            }
-        }
+    public void moveTroops(Country clickedCountry) {
+        /* if (Country country.countryClicked)
+         * if (country in User user.countryArray)
+         *
+         */
     }
 }
