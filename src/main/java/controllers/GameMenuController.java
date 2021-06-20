@@ -24,7 +24,6 @@ public class GameMenuController {
     User user;
     Dice dice;
     private static Country selectedCountry;
-    private static User[] Users;
     private static int turn = 0;
 
 
