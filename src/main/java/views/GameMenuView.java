@@ -167,8 +167,8 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     public void updateCanvas() {
         gc.setFill(Color.BLUE);
         gc.fillRect(0,0,930,580);
-        for (int i = 0; i < gameMenuController.getCountries().size(); i++) {
-            gameMenuController.drawCountry(gameMenuController.getCountries().get(i));
+        for (int i = 0; i < gameMenu.getCountries().size(); i++) {
+            gameMenuController.drawCountry(gameMenu.getCountries().get(i));
         }
     }
 

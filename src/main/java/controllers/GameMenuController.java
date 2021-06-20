@@ -14,6 +14,8 @@ import shared.GameObserver;
 import shared.DiceObserver;
 import shared.UserObserver;
 
+import java.util.ArrayList;
+
 public class GameMenuController {
     static GameMenuController gameMenuController;
     GameMenu gameMenu;
@@ -124,10 +126,23 @@ public class GameMenuController {
         this.gameMenu.updateCanvas();
     }
 
-    public void moveTroops(Country clickedCountry) {
-        /* if (Country country.countryClicked)
-         * if (country in User user.countryArray)
-         *
-         */
+    public void moveTroops() {
+
+        ArrayList myCountry = new ArrayList();
+
+        if (country.isCountrySelected()) {
+
+            while (myCountry.size() < 2){
+
+                if (country.getCountryOwner().toString().equals(user.getPlayerName())) {
+                    System.out.println("this your country, bitchyWitch");
+                    myCountry.add(country.isCountrySelected());
+                    System.out.println(myCountry);
+                    //Select another country to transport troops.
+                } else {
+                    System.out.println("this is not your country dumbass");
+                }
+            }
+        }
     }
 }
