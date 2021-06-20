@@ -28,8 +28,6 @@ import java.util.Objects;
 
 public class GameMenuView implements GameObserver, CountryObserver, DiceObserver, UserObserver {
     GameMenuController gameMenuController;
-    GameMenu gameMenu;
-    User user;
 
     @FXML
     ImageView settingsButton;
@@ -60,8 +58,7 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
         this.gameMenuController.registerUserObserver(this);
 
         //CREATE ALL USER OBJECTS
-        List<User> userList = FirebaseService.fetchPlayers();
-        user.setUserlist(FirebaseService.selectLastFourPlayers(userList));
+
 
         //INIT CANVAS AND DRAW COUNTRIES
         gc = gameCanvas.getGraphicsContext2D();
