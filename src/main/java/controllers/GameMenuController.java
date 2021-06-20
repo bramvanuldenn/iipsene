@@ -37,7 +37,7 @@ public class GameMenuController {
         dice = new Dice();
         user = new User();
         createCountries();
-        countries.get(0).setColor(Color.RED);
+        // countries.get(0).setColor(Color.RED);
         try {
             FirebaseService.addCountries(countries);
         } catch (Exception e) {

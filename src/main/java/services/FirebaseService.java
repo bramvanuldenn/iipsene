@@ -17,12 +17,9 @@ public class FirebaseService {
     public static final String COUNTRY_COLLECTION = "countries";
     public static final String CARD_COLLECTION = "cards";
     public static final String PLAYER_COLLECTION = "players";
-    private static Stack<Color> availableColors;
+    private static List<Color> availableColors = List.of(Color.BLUEVIOLET, Color.YELLOW, Color.DARKOLIVEGREEN, Color.RED);
 
     public static void addPlayer(String playerName) throws Exception {
-        if (availableColors == null) {
-            initAvailableColors();
-        }
         User newUser = new User();
         Integer idNum;
         DocumentReference snapshot = InitFirebase.getDbInstance().collection(PLAYER_COLLECTION).document("info");
@@ -33,10 +30,11 @@ public class FirebaseService {
 
         newUser.setPlayerId(idNum + 1);
         newUser.setPlayerName(playerName);
-        newUser.setColor(availableColors.pop());
+        newUser.setColor(availableColors.get(newUser.getPlayerId() % 4));
 
         Map<String, Object> userData = new HashMap<>();
         userData.put("playerName", newUser.getPlayerName());
+        userData.put("color", newUser.getColor().toString());
         userData.put(CARD_COLLECTION, newUser.getCardArray());
         userData.put(COUNTRY_COLLECTION, newUser.getCountryArray());
 
@@ -47,46 +45,82 @@ public class FirebaseService {
         System.out.println("Added user: " + docRef.get());
     }
 
-    private static void initAvailableColors() {
-        availableColors = new Stack<>();
-        availableColors.push(Color.PINK);
-        availableColors.push(Color.BLACK);
-        availableColors.push(Color.DEEPPINK);
-        availableColors.push(Color.WHITE);
-        availableColors.push(Color.BLUEVIOLET);
-        availableColors.push(Color.YELLOW);
-        availableColors.push(Color.DARKOLIVEGREEN);
-        availableColors.push(Color.RED); // This one is popped first!
-    }
-
     public static void assignCountries() throws Exception {
-        List<String> countries = fetchCountries();
-        List<String> players = fetchPlayers();
-        for (String player : players) {
-            System.out.println(player);
+        List<User> players = selectLastFourPlayers(fetchPlayers());
+        for (User player : players) {
+            System.out.println(player.getPlayerId() + ": " + player.getPlayerName());
         }
+        List<Country> countries = fetchCountries(players, true);
+        // TODO 3. print the country fields
+        for (Country c : countries){
+            System.out.println(c.getCountryName());
+            System.out.println(c.getCountryOwner());
+            System.out.println(c.getCountryX());
+            System.out.println(c.getCountryY());
+            System.out.println(c.getWidth());
+            System.out.println(c.getHeight());
+        }
+
     }
 
-    private static List<String> fetchCountries() throws Exception {
+    private static List<User> selectLastFourPlayers(List<User> fetchPlayers) {
+        List<User> selectedPlayers = new ArrayList<>();
+        Collections.sort(fetchPlayers, Comparator.comparing(User::getPlayerId));
+        Collections.reverse(fetchPlayers);
+        for (User player : fetchPlayers) {
+            player.setColor(null);
+        }
+        for (int playerNumber = 0; playerNumber < 4; playerNumber++) {
+            selectedPlayers.add(fetchPlayers.get(playerNumber));
+        }
+        return selectedPlayers;
+    }
+
+    public static List<Country> fetchCountries(List<User> players) throws Exception {
+        return fetchCountries(players, false);
+    }
+
+    private static List<Country> fetchCountries(List<User> players, boolean startNewGame) throws Exception {
         CollectionReference countriesReference = InitFirebase.getDbInstance()
                 .collection(COUNTRY_COLLECTION);
-        List<String> countries = new ArrayList<>();
-        for (DocumentReference country : countriesReference.listDocuments()) {
-            countries.add(country.getPath());
+        List<Country> countries = new ArrayList<>();
+        for (DocumentReference countryRef : countriesReference.listDocuments()) {
+            ApiFuture<DocumentSnapshot> countryFuture = countryRef.get();
+            DocumentSnapshot countryDocument = countryFuture.get();
+            Map<String,Object> countryMap = countryDocument.getData();
+            Country country = new Country();
+            country.setCountryName(countryRef.getPath().substring(10));
+            if (!startNewGame) {
+                int ownerId = Integer.parseInt((String)countryMap.get("countryOwner"));
+                country.setCountryOwner(players.stream().filter(player -> player.getPlayerId() == ownerId).findFirst().get());
+            }
+            country.setCountryOwner((User) countryMap.get("country"));
+            // TODO 1. uitlezen en opslaan, zie onder
+            country.setCountryTroops(Math.toIntExact((Long) countryMap.get("countryTroops")));
+            country.setCountryX(Math.toIntExact((Long) countryMap.get("countryX")));
+            country.setCountryY(Math.toIntExact((Long) countryMap.get("countryY")));
+            country.setHeight(Math.toIntExact((Long) countryMap.get("height")));
+            country.setWidth(Math.toIntExact((Long) countryMap.get("width")));
+//            countries.add(countryRef.getPath());
+
+            // TODO 2. toevoegen country aan de lijst countries
+            countries.add(country);
         }
         return countries;
     }
 
-    private static List<String> fetchPlayers() throws Exception {
-        List<String> players = new ArrayList<>();
+    private static List<User> fetchPlayers() throws Exception {
+        List<User> players = new ArrayList<>();
         DocumentReference docRef = InitFirebase.getDbInstance().collection(PLAYER_COLLECTION).document("info");
         ApiFuture<DocumentSnapshot> playerFuture = docRef.get();
         DocumentSnapshot playerDocument = playerFuture.get();
         Map<String,Object> playerMap = playerDocument.getData();
-        playerMap.get("info");
         for (String key : playerMap.keySet()) {
+            User user = new User();
             Map<String, Object> value = (Map<String,Object>)playerMap.get(key);
-            players.add((String)value.get("playerName"));
+            user.setPlayerId(Integer.valueOf(key));
+            user.setPlayerName((String)value.get("playerName"));
+            players.add(user);
         }
         return players;
     }
@@ -97,6 +131,10 @@ public class FirebaseService {
             DocumentReference docRef = InitFirebase.getDbInstance().collection(COUNTRY_COLLECTION).document(country.getCountryName());
             batch.update(docRef, "countryTroops", 0);
             batch.update(docRef, "countryOwner", null);
+            batch.update(docRef, "countryX", country.getCountryX());
+            batch.update(docRef, "countryY", country.getCountryY());
+            batch.update(docRef, "width", country.getWidth());
+            batch.update(docRef, "height", country.getHeight());
         }
         ApiFuture<List<WriteResult>> future = batch.commit();
         for (WriteResult result : future.get()) {
