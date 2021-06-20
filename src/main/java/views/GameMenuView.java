@@ -1,6 +1,7 @@
 package views;
 
 import controllers.GameMenuController;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,8 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 import models.Country;
-import models.GameMenu;
 import models.User;
 import shared.CountryObserver;
 import shared.DiceObserver;
