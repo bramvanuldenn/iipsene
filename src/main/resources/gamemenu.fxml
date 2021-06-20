@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.GameMenuView">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.GameMenuView">
    <children>
-      <ImageView fx:id="settingsButton" fitHeight="39.0" fitWidth="38.0" layoutX="6.0" layoutY="8.0" onMouseClicked="#settingsButtonPressed" pickOnBounds="true" preserveRatio="true">
+      <Canvas fx:id="gameCanvas" height="580.0" onMouseClicked="#canvasClicked" width="930.0" />
+      <ImageView fx:id="settingsButton" fitHeight="40.0" fitWidth="40.0" layoutX="8.0" layoutY="8.0" onMouseClicked="#settingsButtonPressed" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@settings-3110.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="playerButton" fitHeight="40.0" fitWidth="40.0" layoutX="8.0" layoutY="532.0" onMouseClicked="#playerButtonPressed" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@playericon.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cardsButton" fitHeight="40.0" fitWidth="40.0" layoutX="882.0" layoutY="532.0" onMouseClicked="#cardsButtonPressed" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@cardsbutton.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="432.0" layoutY="540.0" mnemonicParsing="false" onMouseClicked="#rollDice" text="Roll Dice!" />
+      <Label fx:id="diceRollLabel" layoutX="459.0" layoutY="509.0" prefHeight="17.0" prefWidth="11.0" />
    </children>
 </Pane>

@@ -1,7 +1,7 @@
 package shared;
 
 public interface MenuObservable {
-    public void register(MenuObserver observer);
-    public void notifyAllObservers();
-    public void setGameMenu();
+    void register(MenuObserver observer);
+    void notifyAllObservers();
+    void setGameMenu();
 }

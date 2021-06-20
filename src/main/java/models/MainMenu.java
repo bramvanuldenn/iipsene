@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenu implements MenuObservable {
-    private List<MenuObserver> observers = new ArrayList<MenuObserver>();
+    private List<MenuObserver> observers = new ArrayList<>();
 
     public MainMenu() {
     }

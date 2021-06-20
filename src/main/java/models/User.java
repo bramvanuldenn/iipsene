@@ -1,18 +1,26 @@
 package models;
 
-import java.util.ArrayList;
+import javafx.scene.paint.Color;
+import shared.UserObservable;
+import shared.UserObserver;
 
-/* Alle eigenschappen die een speler kan nodig hebben.
- * vanaf hier kunnen wij alle info van alle spelers controlleren door de setters and getters.
- * @author Hayyan Mezher.
- */
+import java.util.*;
 
-public class User {
+public class User implements UserObservable, UserObserver {
 
-    private String playerName;
-    private Integer playerId;
-    private ArrayList<Double> countryArray;
-    private ArrayList<Double> cardArray;
+    String playerName;
+    Integer playerId;
+    ArrayList<Double> countryArray;
+    ArrayList<Double> cardArray;
+    ArrayList<UserObserver> userObserver = new ArrayList<>();
+    private User user;
+    private Color color;
+
+    public User(Integer playerId) {
+        this.playerId = playerId;
+    }
+
+    public User() {}
 
     public String getPlayerName() {
         return playerName;
@@ -44,5 +52,38 @@ public class User {
 
     public void setCardArray(ArrayList<Double> cardArray) {
         this.cardArray = cardArray;
+    }
+
+    public ArrayList<UserObserver> getUserObserver() {
+        return userObserver;
+    }
+
+    public void setUserObserver(ArrayList<UserObserver> userObserver) {
+        this.userObserver = userObserver;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    @Override
+    public void update(User user) {
+        userObserver.add(user);
+    }
+
+    @Override
+    public void registerObserver(UserObserver observer) {
+        this.userObserver.add(observer);
+    }
+
+    @Override
+    public void notifyAllObservers() {
+        for (UserObserver eachUser : this.userObserver) {
+            user.update(user);
+        }
     }
 }
