@@ -89,7 +89,7 @@ public class GameMenuController {
         /* selects a country and stores it given that the current player owns it
          * @param mouse for the mouse click location
          */
-        for (Country c : countries) {
+        for (Country c : gameMenu.getCountries()) {
             //to be uncommented when turns are a thing
 //            if (c.inBounds(mouse) && c.numSoldiers > 1) {
                 selectedCountry = c;
