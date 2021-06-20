@@ -2,9 +2,6 @@ package services;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 import models.Country;
 import models.User;
 import views.MainMenuView;
@@ -55,7 +52,7 @@ public class FirebaseService {
         //list filled with user id's
         List<Integer> keys = new ArrayList<>();
         for (User player : players) {
-            System.out.println(player.getPlayerId() + " : " + player.getPlayerName());
+            System.out.println(player.getPlayerId() + ": " + player.getPlayerName());
             playerMap.put(player.getPlayerId(), player);
             keys.add(player.getPlayerId());
         }
@@ -76,10 +73,9 @@ public class FirebaseService {
             currentAssignmentPosition++;
         }
         ApiFuture<List<WriteResult>> future = batch.commit();
-        System.out.println(future.get());
     }
 
-    public static List<User> selectLastFourPlayers(List<User> fetchPlayers) {
+    private static List<User> selectLastFourPlayers(List<User> fetchPlayers) {
         List<User> selectedPlayers = new ArrayList<>();
         Collections.sort(fetchPlayers, Comparator.comparing(User::getPlayerId));
         Collections.reverse(fetchPlayers);
