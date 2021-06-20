@@ -123,10 +123,6 @@ public class GameMenuController {
         dice.rolDice();
     }
 
-    public void createCountriesController() {
-        gameMenu.createCountries();
-    }
-
     public void drawCountry(Country country) {
         this.country.drawCountry(country);
     }
