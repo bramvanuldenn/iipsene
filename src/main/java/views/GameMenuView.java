@@ -44,7 +44,7 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     private Stage playerWindow;
 
     @FXML
-    protected void initialize() {
+    protected void initialize() throws Exception {
         //INIT CONTROLLER
         this.gameMenuController = GameMenuController.getInstance();
 

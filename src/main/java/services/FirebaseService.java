@@ -44,23 +44,35 @@ public class FirebaseService {
             .update(String.valueOf(newUser.getPlayerId()), userData);
         System.out.println("Added user: " + docRef.get());
     }
-
+//give countries to users
     public static void assignCountries() throws Exception {
+        //get last 4 players out of database
         List<User> players = selectLastFourPlayers(fetchPlayers());
+        Map<Integer, User> playerMap = new HashMap<>();
+        //list filled with user id's
+        List<Integer> keys = new ArrayList<>();
         for (User player : players) {
             System.out.println(player.getPlayerId() + ": " + player.getPlayerName());
+            playerMap.put(player.getPlayerId(), player);
+            keys.add(player.getPlayerId());
         }
         List<Country> countries = fetchCountries(players, true);
-        // TODO 3. print the country fields
-        for (Country c : countries){
-            System.out.println(c.getCountryName());
-            System.out.println(c.getCountryOwner());
-            System.out.println(c.getCountryX());
-            System.out.println(c.getCountryY());
-            System.out.println(c.getWidth());
-            System.out.println(c.getHeight());
+        int currentAssignmentPosition = 0;
+        WriteBatch batch = InitFirebase.getDbInstance().batch();
+        while (!countries.isEmpty()) {
+            Integer currentKey = keys.get(currentAssignmentPosition % 4);
+            int randomRoll = countries.size() == 1 ?
+                0 :
+                new Random().nextInt(countries.size() - 1);
+            Country selectedCountry = countries.remove(randomRoll);
+            //give the country an owner
+            selectedCountry.setCountryOwner(playerMap.get(currentKey));
+            System.out.println(currentKey + ": " + selectedCountry.getCountryName());
+            DocumentReference docRef = InitFirebase.getDbInstance().collection(COUNTRY_COLLECTION).document(selectedCountry.getCountryName());
+            batch.update(docRef, "countryOwner", currentKey);
+            currentAssignmentPosition++;
         }
-
+        ApiFuture<List<WriteResult>> future = batch.commit();
     }
 
     private static List<User> selectLastFourPlayers(List<User> fetchPlayers) {
@@ -91,10 +103,9 @@ public class FirebaseService {
             Country country = new Country();
             country.setCountryName(countryRef.getPath().substring(10));
             if (!startNewGame) {
-                int ownerId = Integer.parseInt((String)countryMap.get("countryOwner"));
-                country.setCountryOwner(players.stream().filter(player -> player.getPlayerId() == ownerId).findFirst().get());
+                Integer ownerId = Math.toIntExact((Long)countryMap.get("countryOwner"));
+                country.setCountryOwner(players.stream().filter(player -> player.getPlayerId().equals(ownerId)).findFirst().get());
             }
-            country.setCountryOwner((User) countryMap.get("country"));
             // TODO 1. uitlezen en opslaan, zie onder
             country.setCountryTroops(Math.toIntExact((Long) countryMap.get("countryTroops")));
             country.setCountryX(Math.toIntExact((Long) countryMap.get("countryX")));
@@ -109,7 +120,7 @@ public class FirebaseService {
         return countries;
     }
 
-    private static List<User> fetchPlayers() throws Exception {
+    public static List<User> fetchPlayers() throws Exception {
         List<User> players = new ArrayList<>();
         DocumentReference docRef = InitFirebase.getDbInstance().collection(PLAYER_COLLECTION).document("info");
         ApiFuture<DocumentSnapshot> playerFuture = docRef.get();
@@ -120,12 +131,18 @@ public class FirebaseService {
             Map<String, Object> value = (Map<String,Object>)playerMap.get(key);
             user.setPlayerId(Integer.valueOf(key));
             user.setPlayerName((String)value.get("playerName"));
+            String colorText = (String)value.get("color");
+            if (colorText == null) {
+                user.setColor(Color.GRAY);
+            } else {
+                user.setColor(Color.valueOf(colorText));
+            }
             players.add(user);
         }
         return players;
     }
 
-    public static void addCountries(ArrayList<Country> countries) throws IOException, ExecutionException, InterruptedException {
+    public static void addCountries(List<Country> countries) throws IOException, ExecutionException, InterruptedException {
         WriteBatch batch = InitFirebase.getDbInstance().batch();
         for (Country country : countries) {
             DocumentReference docRef = InitFirebase.getDbInstance().collection(COUNTRY_COLLECTION).document(country.getCountryName());

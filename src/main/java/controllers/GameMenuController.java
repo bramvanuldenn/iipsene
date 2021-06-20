@@ -2,7 +2,6 @@ package controllers;
 
 import javafx.scene.input.MouseEvent;
 
-import javafx.scene.paint.Color;
 import models.User;
 import models.Country;
 import models.Dice;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class GameMenuController {
-    final ArrayList<Country> countries = new ArrayList<>();
+    List<Country> countries;
     static GameMenuController gameMenuController;
     GameMenu gameMenu;
     Country country;
@@ -31,11 +30,21 @@ public class GameMenuController {
     private static int turn = 0;
 
 
-    public GameMenuController() {
+    public GameMenuController() throws Exception {
         gameMenu = new GameMenu();
         country = new Country();
         dice = new Dice();
         user = new User();
+        // Only activate when we need countries in the database
+//        createCountriesInDatabase();
+
+        List<User> players = FirebaseService.fetchPlayers();
+        this.countries = FirebaseService.fetchCountries(players);
+        System.out.println(this.countries.size());
+    }
+
+    private void createCountriesInDatabase() {
+        this.countries = new ArrayList<>();
         createCountries();
         // countries.get(0).setColor(Color.RED);
         try {
@@ -45,7 +54,7 @@ public class GameMenuController {
         }
     }
 
-    public static GameMenuController getInstance() {
+    public static GameMenuController getInstance() throws Exception {
         if (gameMenuController == null){
             gameMenuController = new GameMenuController();
         }
