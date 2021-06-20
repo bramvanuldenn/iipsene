@@ -24,7 +24,6 @@ import java.util.Objects;
 
 public class GameMenuView implements GameObserver, CountryObserver, DiceObserver, UserObserver {
     GameMenuController gameMenuController;
-    GameMenu gameMenu;
 
     @FXML
     ImageView settingsButton;
@@ -167,8 +166,8 @@ public class GameMenuView implements GameObserver, CountryObserver, DiceObserver
     public void updateCanvas() {
         gc.setFill(Color.BLUE);
         gc.fillRect(0,0,930,580);
-        for (int i = 0; i < gameMenu.getCountries().size(); i++) {
-            gameMenuController.drawCountry(gameMenu.getCountries().get(i));
+        for (int i = 0; i < gameMenuController.getGameMenuController().size(); i++) {
+            gameMenuController.drawCountry(gameMenuController.getGameMenuController().get(i));
         }
     }
 

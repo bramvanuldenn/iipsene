@@ -15,6 +15,7 @@ import shared.DiceObserver;
 import shared.UserObserver;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameMenuController {
     static GameMenuController gameMenuController;
@@ -74,6 +75,10 @@ public class GameMenuController {
         gameMenu.setPlayerVis();
     }
 
+    public List<Country> getGameMenuController() {
+        return gameMenu.getCountries();
+    }
+
     public void canvasClicked(MouseEvent e) {
         System.out.println("Clicked in the canvas at x: " + e.getX() + " and y: " + e.getY());
         Country clickedCountry = getCountry(e.getX(), e.getY());
@@ -116,6 +121,10 @@ public class GameMenuController {
 
     public void rollDice() {
         dice.rolDice();
+    }
+
+    public void createCountriesController() {
+        gameMenu.createCountries();
     }
 
     public void drawCountry(Country country) {
