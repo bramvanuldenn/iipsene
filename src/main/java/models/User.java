@@ -1,7 +1,6 @@
 package models;
 
 import javafx.scene.paint.Color;
-import shared.DiceObserver;
 import shared.UserObservable;
 import shared.UserObserver;
 

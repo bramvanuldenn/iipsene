@@ -23,6 +23,7 @@ public class FirebaseService {
         if (availableColors == null) {
             initAvailableColors();
         }
+
         User newUser = new User();
         Integer idNum;
         DocumentReference snapshot = InitFirebase.getDbInstance().collection(PLAYER_COLLECTION).document("info");
