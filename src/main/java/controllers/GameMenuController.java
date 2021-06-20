@@ -33,6 +33,14 @@ public class GameMenuController {
         country = new Country();
         dice = new Dice();
         user = new User();
+        try {
+            List<User> userList = FirebaseService.fetchPlayers();
+            user.setUserlist(FirebaseService.selectLastFourPlayers(userList));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+
         gameMenu.createCountries();
 //        countries.get(0).setColor(Color.RED);
         try {
